@@ -1,0 +1,75 @@
+<template>
+    <lightning-card title="Clinical Snapshot" icon-name="standard:health_check">
+        <div slot="actions">
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                alternative-text="Refresh snapshot"
+                title="Refresh snapshot"
+                onclick={handleRefresh}
+            ></lightning-button-icon>
+        </div>
+
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading verified patient data" size="small"></lightning-spinner>
+        </template>
+
+        <template lwc:if={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+                    <span>{errorMessage}</span>
+                </div>
+            </div>
+        </template>
+
+        <template lwc:if={snapshot}>
+            <div class="snapshot-grid slds-p-around_medium">
+                <section aria-labelledby="observations-heading">
+                    <h2 id="observations-heading" class="slds-text-heading_small slds-m-bottom_small">
+                        Recent verified readings
+                    </h2>
+                    <template lwc:if={hasObservations}>
+                        <ul class="reading-list">
+                            <template for:each={snapshot.observations} for:item="observation">
+                                <li key={observation.id} class="reading">
+                                    <div>
+                                        <strong>{observation.type}</strong>
+                                        <template lwc:if={observation.outsideThreshold}>
+                                            <lightning-badge label="Review"></lightning-badge>
+                                        </template>
+                                    </div>
+                                    <div>{observation.value} {observation.unit}</div>
+                                    <div class="slds-text-color_weak slds-text-body_small">
+                                        {observation.recordedDate} | {observation.source}
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <template lwc:else>
+                        <p class="slds-text-color_weak">No verified readings are available.</p>
+                    </template>
+                </section>
+
+                <section aria-labelledby="medications-heading">
+                    <h2 id="medications-heading" class="slds-text-heading_small slds-m-bottom_small">
+                        Current verified medications
+                    </h2>
+                    <template lwc:if={hasMedications}>
+                        <ul class="reading-list">
+                            <template for:each={snapshot.medications} for:item="medication">
+                                <li key={medication.id} class="reading">
+                                    <strong>{medication.drugName}</strong>
+                                    <div>{medication.dosage}</div>
+                                    <div class="slds-text-color_weak slds-text-body_small">{medication.frequency}</div>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <template lwc:else>
+                        <p class="slds-text-color_weak">No current verified medications are available.</p>
+                    </template>
+                </section>
+            </div>
+        </template>
+    </lightning-card>
+</template>

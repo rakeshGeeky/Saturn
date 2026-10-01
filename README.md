@@ -74,6 +74,7 @@ The flow layer has been extended with workbook-based record-triggered flow metad
 
 The implementation continues with workbook-aligned service logic for patient outreach eligibility, appointment-driven journey synchronization, and safety-case escalation handling, which closes the gap between the domain model and the live care-orchestration workflow.
 
+The patient clinical snapshot LWC is exposed for Account record pages. Add **Zime Patient Clinical Snapshot** in Lightning App Builder to the patient Account record page. It displays only verified observations and current verified medications, with the latest ten of each. Users need `PS_Zco_ClinicalData_Read`, record-level access, and read access to the queried clinical fields. The component does not interpret values as clinical advice.
 ## Lightning App
 
 The **Zime Care Orchestration** Lightning app brings patient Accounts, Leads, Opportunities, care journeys, appointments, patient intake, clinical observations, medication statements, messages, tasks, safety cases, reports, and dashboards into one navigation bar. Care-team users can open the app from the Salesforce App Launcher after deployment and receive app/tab access through their assigned profiles or permission sets.

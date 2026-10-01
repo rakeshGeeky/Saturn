@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <description>Map extracted clinical values into Medication_Statement__c and Clinical_Observation__c records for verification workflows.</description>
+    <label>Zco_Extraction_AfterSave_Map</label>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <recordCreates/>
+    <recordLookups/>
+    <recordUpdates/>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <object>Extraction_Result__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>
