@@ -25,6 +25,7 @@
         <members>Step__c</members>
         <members>Zco_Eligibility_Rule__mdt</members>
         <members>Zco_Clinical_Threshold__mdt</members>
+        <members>Zco_Feature_Flag__mdt</members>
         <members>Zco_Safety_Keyword__mdt</members>
         <name>CustomObject</name>
     </types>
@@ -39,6 +40,10 @@
         <members>Clinical_Observation__c.Threshold_Rule__c</members>
         <members>Clinical_Observation__c.Action_Required__c</members>
         <name>CustomField</name>
+    </types>
+    <types>
+        <members>Zco_Feature_Flag__mdt.Enable_Integration_Logging</members>
+        <name>CustomMetadata</name>
     </types>
     <types>
         <members>PS_Zco_Core</members>
@@ -76,6 +81,19 @@
         <members>ZcoOutreachService</members>
         <members>ZcoAppointmentService</members>
         <members>ZcoSafetyEscalationService</members>
+        <members>ZcoCareLoopController</members>
+        <members>ZcoCareLoopControllerTest</members>
+        <members>ZcoFeatureFlags</members>
+        <members>ZcoFeatureFlagsTest</members>
+        <members>ZcoIntegrationLogger</members>
+        <members>ZcoIntegrationLoggerTest</members>
+        <members>ZcoWebhookSecurity</members>
+        <members>ZcoWebhookSecurityTest</members>
+        <members>ZcoRetryScheduler</members>
+        <members>ZcoEligibilityService</members>
+        <members>ZcoEligibilityServiceTest</members>
+        <members>ZcoPreConsultSummaryController</members>
+        <members>ZcoPreConsultSummaryControllerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -88,10 +106,18 @@
         <members>Zco_Safety_Escalate</members>
         <members>Zco_CareJourney_AfterSave_StateRouter</members>
         <members>Zco_Appointment_AfterSave_Journey</members>
+        <members>Zco_PE_CallEvent</members>
+        <members>Zco_PE_WhatsAppInbound</members>
+        <members>Zco_Extraction_AfterSave_Map</members>
+        <members>Zco_Case_Scheduled_SafetySLA</members>
+        <members>Zco_Intake_AfterSave_Eligibility</members>
         <name>Flow</name>
     </types>
     <types>
         <members>zcoPatientSnapshot</members>
+        <members>zcoCallScreenPop</members>
+        <members>zcoCareJourneyPath</members>
+        <members>zcoPreConsultSummary</members>
         <name>LightningComponentBundle</name>
     </types>
     <version>67.0</version>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <description>Evaluate a patient intake against eligibility rules and route the result to the correct care workflow.</description>
+    <label>Zco_Intake_AfterSave_Eligibility</label>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <recordCreates/>
+    <recordLookups/>
+    <recordUpdates/>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <object>Patient_Intake__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>
