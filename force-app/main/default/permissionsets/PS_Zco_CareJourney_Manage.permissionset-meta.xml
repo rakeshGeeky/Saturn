@@ -3,7 +3,10 @@
 <label>PS_Zco_CareJourney_Manage</label>
 <description>Workbook-derived permission set for PS_Zco_CareJourney_Manage.</description>
 <hasActivationRequired>false</hasActivationRequired>
-<license>None</license>
+<classAccesses>
+    <apexClass>ZcoCareDashboardController</apexClass>
+    <enabled>true</enabled>
+</classAccesses>
 <objectPermissions>
 <allowCreate>true</allowCreate>
 <allowDelete>false</allowDelete>

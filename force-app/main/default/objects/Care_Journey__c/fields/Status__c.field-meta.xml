@@ -22,6 +22,11 @@
 <label>Outreach sent</label>
 </value>
 <value>
+<fullName>Scheduled</fullName>
+<default>false</default>
+<label>Scheduled</label>
+</value>
+<value>
 <fullName>Snoozed</fullName>
 <default>false</default>
 <label>Snoozed</label>

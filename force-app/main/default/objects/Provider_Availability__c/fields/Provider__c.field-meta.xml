@@ -5,6 +5,7 @@
 <type>Lookup</type>
 <required>true</required>
 <referenceTo>Provider__c</referenceTo>
+<deleteConstraint>Restrict</deleteConstraint>
 <relationshipLabel>Provider Records</relationshipLabel>
-<relationshipName>Provider</relationshipName>
+<relationshipName>ProviderAvailabilityProvider</relationshipName>
 </CustomField>

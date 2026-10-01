@@ -3,7 +3,6 @@
 <fullName>Preferred_Language__c</fullName>
 <label>Preferred Language</label>
 <type>Picklist</type>
-<defaultValue>English</defaultValue>
 <valueSet>
 <valueSetDefinition>
 <value>

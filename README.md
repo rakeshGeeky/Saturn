@@ -74,3 +74,30 @@ The flow layer has been extended with workbook-based record-triggered flow metad
 
 The implementation continues with workbook-aligned service logic for patient outreach eligibility, appointment-driven journey synchronization, and safety-case escalation handling, which closes the gap between the domain model and the live care-orchestration workflow.
 
+## Lightning App
+
+The **Zime Care Orchestration** Lightning app brings patient Accounts, Leads, Opportunities, care journeys, appointments, patient intake, clinical observations, medication statements, messages, tasks, safety cases, reports, and dashboards into one navigation bar. Care-team users can open the app from the Salesforce App Launcher after deployment and receive app/tab access through their assigned profiles or permission sets.
+
+Care journey state changes are now guarded by `CareJourneyTrigger` against the workbook transition map, with an admin bypass custom permission. The daily due batch implements the workbook's due, snooze expiry, outreach retry-gap, future-appointment exclusion, and lost-to-follow-up checks. Due care journeys can be processed on a schedule by `ZcoJourneyDueScheduler`. Schedule it from Execute Anonymous after deployment, choosing an agreed local time:
+
+```apex
+System.schedule(
+    'ZCO Daily Journey Due Processing',
+    '0 0 2 * * ?',
+    new ZcoJourneyDueScheduler()
+);
+```
+
+
+## Validate and Deploy
+
+After authenticating your Salesforce org with `sf org login web --alias <alias>`, validate the source before deploying:
+
+```sh
+sf project deploy validate --source-dir force-app --target-org <alias> --test-level RunLocalTests
+sf project deploy start --source-dir force-app --target-org <alias> --test-level RunLocalTests
+```
+
+The validation command performs a check-only deployment; the start command applies the metadata. The workbook implementation was validated against the connected development org with local Apex tests.
+
+The workbook backlog is not fully complete. Remaining work includes integrating actual WhatsApp/TeleCMI/FHIR/scheduler services, completing the draft flows and safety/consent suppression behavior, creating patient and coordinator Lightning record pages/components, and resolving org setup decisions such as Person Accounts, named credentials, queues, and clinical configuration with the org owner.

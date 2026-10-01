@@ -5,4 +5,6 @@
 <type>Lookup</type>
 <required>true</required>
 <referenceTo>Account</referenceTo>
+<deleteConstraint>Restrict</deleteConstraint>
+<relationshipName>EnrollmentPatient</relationshipName>
 </CustomField>

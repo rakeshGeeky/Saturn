@@ -4,7 +4,7 @@
 <label>LTFU After Days</label>
 <type>Number</type>
 <required>false</required>
-<precision>30</precision>
+<precision>18</precision>
 <scale>0</scale>
 <defaultValue>0</defaultValue>
 </CustomField>

@@ -5,6 +5,7 @@
 <type>Lookup</type>
 <required>true</required>
 <referenceTo>Account</referenceTo>
+<deleteConstraint>Restrict</deleteConstraint>
 <relationshipLabel>Caregiver Records</relationshipLabel>
-<relationshipName>Caregiver</relationshipName>
+<relationshipName>CaregiverRelationshipCaregiver</relationshipName>
 </CustomField>

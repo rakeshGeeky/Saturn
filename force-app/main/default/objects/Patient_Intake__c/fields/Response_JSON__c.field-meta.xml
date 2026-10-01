@@ -4,5 +4,6 @@
 <label>Response JSON</label>
 <type>LongTextArea</type>
 <required>false</required>
+<visibleLines>3</visibleLines>
 <length>32768</length>
 </CustomField>

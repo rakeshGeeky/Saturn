@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>Care_Journey__c</referenceTo>
 <relationshipLabel>Care Journey Records</relationshipLabel>
-<relationshipName>CareJourney</relationshipName>
+<relationshipName>AppointmentCareJourney</relationshipName>
 </CustomField>

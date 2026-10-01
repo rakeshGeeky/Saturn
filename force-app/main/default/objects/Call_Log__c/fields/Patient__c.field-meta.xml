@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>Account</referenceTo>
 <relationshipLabel>Patient Records</relationshipLabel>
-<relationshipName>Patient</relationshipName>
+<relationshipName>CallLogPatient</relationshipName>
 </CustomField>

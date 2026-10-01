@@ -4,5 +4,5 @@
 <label>Primary Coordinator</label>
 <type>Lookup</type>
 <referenceTo>User</referenceTo>
-<trackHistory>true</trackHistory>
+<relationshipName>AccountPrimaryCoordinator</relationshipName>
 </CustomField>

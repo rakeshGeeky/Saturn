@@ -15,7 +15,6 @@
 <enableStreamingApi>true</enableStreamingApi>
 <label>Provider</label>
 <nameField>
-<displayFormat></displayFormat>
 <label>Provider Name</label>
 <type>Text</type>
 </nameField>

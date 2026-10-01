@@ -5,4 +5,5 @@
 <type>Lookup</type>
 <required>false</required>
 <referenceTo>Asset</referenceTo>
+<relationshipName>DeviceShipmentAsset</relationshipName>
 </CustomField>

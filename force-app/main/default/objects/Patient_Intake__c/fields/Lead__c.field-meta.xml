@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>Lead</referenceTo>
 <relationshipLabel>Lead Records</relationshipLabel>
-<relationshipName>Lead</relationshipName>
+<relationshipName>PatientIntakeLead</relationshipName>
 </CustomField>

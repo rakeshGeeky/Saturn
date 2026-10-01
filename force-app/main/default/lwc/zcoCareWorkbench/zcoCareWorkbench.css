@@ -1,0 +1,54 @@
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.metric {
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    background: #fff;
+}
+
+.metric strong {
+    font-size: 1.35rem;
+}
+
+.metric-label {
+    color: #5c5c5c;
+    font-size: 0.75rem;
+}
+
+.metric.due {
+    border-left: 4px solid #ba0517;
+}
+
+.filter {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+@media (max-width: 48rem) {
+    .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .filter {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

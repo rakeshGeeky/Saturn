@@ -4,5 +4,4 @@
 <label>Endpoint</label>
 <type>Url</type>
 <required>false</required>
-<length>255</length>
 </CustomField>

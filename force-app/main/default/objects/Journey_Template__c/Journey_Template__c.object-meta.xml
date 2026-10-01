@@ -15,7 +15,6 @@
 <enableStreamingApi>true</enableStreamingApi>
 <label>Journey Template</label>
 <nameField>
-<displayFormat></displayFormat>
 <label>Journey Template Name</label>
 <type>Text</type>
 </nameField>

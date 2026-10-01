@@ -26,6 +26,7 @@
         <members>Zco_Eligibility_Rule__mdt</members>
         <members>Zco_Clinical_Threshold__mdt</members>
         <members>Zco_Safety_Keyword__mdt</members>
+        <members>Zco_Commercial_Setting__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -38,7 +39,24 @@
         <members>Clinical_Observation__c.Outside_Threshold__c</members>
         <members>Clinical_Observation__c.Threshold_Rule__c</members>
         <members>Clinical_Observation__c.Action_Required__c</members>
+        <members>Care_Journey__c.State_Changed_At__c</members>
+        <members>Care_Journey__c.Attempts__c</members>
+        <members>Case.Safety_Escalation__c</members>
+        <members>Message_Template__c.Medical_Approved_By__c</members>
+        <members>Opportunity.Eligibility_Status__c</members>
+        <members>Opportunity.Discount_Approval__c</members>
+        <members>Opportunity.Discount_Pct__c</members>
+        <members>Case.Ack_At__c</members>
+        <members>Activity.Patient_Response__c</members>
+        <members>Activity.Care_Task_Type__c</members>
+        <members>Care_Journey__c.Closed_Reason__c</members>
+        <members>Appointment__c.Teleconsult_Consent__c</members>
+        <members>Appointment__c.Mode__c</members>
         <name>CustomField</name>
+    </types>
+    <types>
+        <members>Zco_Commercial_Setting.Default</members>
+        <name>CustomMetadata</name>
     </types>
     <types>
         <members>PS_Zco_Core</members>
@@ -61,6 +79,25 @@
         <name>PermissionSetGroup</name>
     </types>
     <types>
+        <members>Appointment__c.APT_Teleconsult_Consent</members>
+        <members>Care_Journey__c.CJ_Close_Needs_Reason</members>
+        <members>Care_Journey__c.CJ_Snooze_Needs_Date</members>
+        <members>Caregiver_Relationship__c.CGR_No_Self_Link</members>
+        <members>Case.CASE_Safety_Ack_Before_Close</members>
+        <members>Clinical_Observation__c.OBS_Unit_Matches_Type</members>
+        <members>Clinical_Observation__c.OBS_Value_Positive</members>
+        <members>Message_Template__c.MT_Safety_Needs_Medical</members>
+        <members>Message_Template__c.MT_No_Approval_With_Banned_Phrase</members>
+        <members>Message_Template__c.MT_Approval_Before_Active</members>
+        <members>Opportunity.OPP_Discount_Approved</members>
+        <members>Opportunity.OPP_Eligibility_Before_Payment</members>
+        <members>Patient_Intake__c.PI_Caregiver_Needs_Patient_Consent</members>
+        <members>Patient_Intake__c.PI_Patient_Or_Lead</members>
+        <members>Medication_Statement__c.MS_Verified_Before_Current</members>
+        <members>Task.TSK_LTFU_Needs_Reason</members>
+        <name>ValidationRule</name>
+    </types>
+    <types>
         <members>ZcoPhoneUtil</members>
         <members>ZcoCareJourneyService</members>
         <members>ZcoMessagingService</members>
@@ -74,7 +111,24 @@
         <members>ZcoOutreachService</members>
         <members>ZcoAppointmentService</members>
         <members>ZcoSafetyEscalationService</members>
+        <members>ZcoWorkbookServicesTest</members>
+        <members>ZcoJourneyDueScheduler</members>
+        <members>ZcoCareJourneyTriggerHandler</members>
+        <members>ZcoCareDashboardController</members>
+        <members>ZcoCareDashboardControllerTest</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>CareJourneyTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>Zco_Bypass_Journey_Rules</members>
+        <name>CustomPermission</name>
+    </types>
+    <types>
+        <members>Zco_Care_Workbench</members>
+        <name>FlexiPage</name>
     </types>
     <types>
         <members>Zco_Account_BeforeSave_Normalize</members>
@@ -87,6 +141,24 @@
         <members>Zco_CareJourney_AfterSave_StateRouter</members>
         <members>Zco_Appointment_AfterSave_Journey</members>
         <name>Flow</name>
+    </types>
+    <types>
+        <members>Zime_Care_Orchestration</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>zcoCareWorkbench</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>Care_Journey__c</members>
+        <members>Appointment__c</members>
+        <members>Patient_Intake__c</members>
+        <members>Clinical_Observation__c</members>
+        <members>Medication_Statement__c</members>
+        <members>WhatsApp_Message__c</members>
+        <members>Zco_Care_Workbench</members>
+        <name>CustomTab</name>
     </types>
     <version>67.0</version>
 </Package>

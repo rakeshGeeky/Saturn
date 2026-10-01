@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>Opportunity</referenceTo>
 <relationshipLabel>Opportunity Records</relationshipLabel>
-<relationshipName>Opportunity</relationshipName>
+<relationshipName>PaymentOpportunity</relationshipName>
 </CustomField>
