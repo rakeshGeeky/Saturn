@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>TSK_LTFU_Needs_Reason</fullName>
+<active>true</active>
+<errorConditionFormula>ISPICKVAL(Care_Task_Type__c,'LTFU call') &amp;&amp; IsClosed &amp;&amp; ISBLANK(Patient_Response__c)</errorConditionFormula>
+<errorMessage>Record the lost-to-follow-up reason before closing.</errorMessage>
+</ValidationRule>

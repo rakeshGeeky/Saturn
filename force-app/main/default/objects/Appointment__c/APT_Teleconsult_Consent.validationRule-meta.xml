@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>APT_Teleconsult_Consent</fullName>
+<active>true</active>
+<errorConditionFormula>(ISPICKVAL(Mode__c,'Video') || ISPICKVAL(Mode__c,'Phone')) &amp;&amp; ISPICKVAL(Status__c,'Completed') &amp;&amp; NOT(Teleconsult_Consent__c)</errorConditionFormula>
+<errorMessage>Tele-consultation consent is required.</errorMessage>
+</ValidationRule>

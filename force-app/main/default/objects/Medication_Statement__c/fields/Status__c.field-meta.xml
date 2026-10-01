@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>Status__c</fullName>
+<label>Status</label>
+<type>Picklist</type>
+<required>true</required>
+<valueSet>
+<valueSetDefinition>
+<value>
+<fullName>Current</fullName>
+<default>true</default>
+<label>Current</label>
+</value>
+<value>
+<fullName>Past</fullName>
+<default>false</default>
+<label>Past</label>
+</value>
+<value>
+<fullName>Discontinued</fullName>
+<default>false</default>
+<label>Discontinued</label>
+</value>
+</valueSetDefinition>
+</valueSet>
+</CustomField>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>Type__c</fullName>
+<label>Type</label>
+<type>Picklist</type>
+<required>true</required>
+<valueSet>
+<valueSetDefinition>
+<value>
+<fullName>HbA1c</fullName>
+<default>false</default>
+<label>HbA1c</label>
+</value>
+<value>
+<fullName>Fasting glucose</fullName>
+<default>false</default>
+<label>Fasting glucose</label>
+</value>
+<value>
+<fullName>Post-meal glucose</fullName>
+<default>false</default>
+<label>Post-meal glucose</label>
+</value>
+<value>
+<fullName>Random glucose</fullName>
+<default>true</default>
+<label>Random glucose</label>
+</value>
+<value>
+<fullName>BP systolic</fullName>
+<default>false</default>
+<label>BP systolic</label>
+</value>
+<value>
+<fullName>BP diastolic</fullName>
+<default>false</default>
+<label>BP diastolic</label>
+</value>
+<value>
+<fullName>Weight</fullName>
+<default>false</default>
+<label>Weight</label>
+</value>
+<value>
+<fullName>LDL</fullName>
+<default>false</default>
+<label>LDL</label>
+</value>
+<value>
+<fullName>eGFR</fullName>
+<default>false</default>
+<label>eGFR</label>
+</value>
+</valueSetDefinition>
+</valueSet>
+</CustomField>

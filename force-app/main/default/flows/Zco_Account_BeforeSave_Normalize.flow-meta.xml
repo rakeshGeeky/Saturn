@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<apiVersion>67.0</apiVersion>
+<description>Normalize mobile numbers before saving Patient or Caregiver Account records.</description>
+<label>Zco_Account_BeforeSave_Normalize</label>
+<processMetadataValues>
+    <name>CanvasMode</name>
+    <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+</processMetadataValues>
+<processMetadataValues>
+    <name>OriginBuilderType</name>
+    <value><stringValue>LightningFlowBuilder</stringValue></value>
+</processMetadataValues>
+<recordCreates/>
+<recordLookups/>
+<recordUpdates/>
+<start>
+    <locationX>0</locationX>
+    <locationY>0</locationY>
+    <object>Account</object>
+    <recordTriggerType>CreateAndUpdate</recordTriggerType>
+    <triggerType>RecordBeforeSave</triggerType>
+    <filterLogic>1</filterLogic>
+    <filters>
+        <field>Id</field>
+        <operator>IsNull</operator>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </filters>
+</start>
+<status>Draft</status>
+</Flow>

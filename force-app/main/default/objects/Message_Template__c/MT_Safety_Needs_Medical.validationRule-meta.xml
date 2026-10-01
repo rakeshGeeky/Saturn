@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>MT_Safety_Needs_Medical</fullName>
+<active>true</active>
+<errorConditionFormula>ISPICKVAL(Category__c,'Safety') &amp;&amp; Active__c &amp;&amp; ISBLANK(Medical_Approved_By__c)</errorConditionFormula>
+<errorMessage>Safety templates need a named medical approver.</errorMessage>
+</ValidationRule>

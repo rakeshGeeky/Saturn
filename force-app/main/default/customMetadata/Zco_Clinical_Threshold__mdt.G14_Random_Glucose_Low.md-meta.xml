@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<label>Zco_Clinical_Threshold__mdt</label>
+<protected>false</protected>
+<values>
+<field>Observation_Type__c</field>
+<value xsi:type="xsd:string">Random glucose</value>
+</values>
+<values>
+<field>Unit__c</field>
+<value xsi:type="xsd:string">mg/dL</value>
+</values>
+<values>
+<field>Low__c</field>
+<value xsi:type="xsd:double">54</value>
+</values>
+<values>
+<field>High__c</field>
+<value xsi:type="xsd:string"></value>
+</values>
+<values>
+<field>Action__c</field>
+<value xsi:type="xsd:string">Safety case</value>
+</values>
+<values>
+<field>Applies_To_Source__c</field>
+<value xsi:type="xsd:string">All</value>
+</values>
+<values>
+<field>Guardrail_Id__c</field>
+<value xsi:type="xsd:string">G14</value>
+</values>
+<values>
+<field>Active__c</field>
+<value xsi:type="xsd:boolean">false</value>
+</values>
+</CustomMetadata>

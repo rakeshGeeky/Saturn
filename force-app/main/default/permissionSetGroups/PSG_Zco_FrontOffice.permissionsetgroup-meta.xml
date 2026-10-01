@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+<label>PSG_Zco_FrontOffice</label>
+<description>Clinic front desk</description>
+<permissionSets>PS_Zco_Core</permissionSets>
+</PermissionSetGroup>

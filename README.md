@@ -56,3 +56,21 @@ Transform your ideas into custom Lightning apps that extend CRM workflows direct
 - [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
 - [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
 
+## Workbook-Driven Implementation Status
+
+The repository now includes the initial Salesforce metadata skeleton derived from the Zime Care Orchestration workbook.
+
+Coverage so far includes:
+- Core patient-journey domain objects and fields
+- Account-level identifiers and operational flags for the patient engagement flow
+- Core Apex automation stubs for journey transitions, messaging, phone normalization, FHIR lookups, and due processing
+- A deployment manifest for the initial build set
+
+This is the foundation for the remaining modules in the workbook (security, custom metadata, flows, LWC, and integrations), which can be added in subsequent implementation passes.
+
+The implementation now also includes workbook-aligned workflow services for consent capture, safety keyword scanning, clinical threshold handling, banned phrase validation, and patient matching, which mirror the major orchestration patterns in the workbook.
+
+The flow layer has been extended with workbook-based record-triggered flow metadata for account normalization, message-template approval guardrails, banned-phrase scans, clinical-threshold evaluation, consent capture/withdrawal, safety escalation, journey state routing, and appointment synchronization, covering the next wave of the orchestration automation described in the workbook.
+
+The implementation continues with workbook-aligned service logic for patient outreach eligibility, appointment-driven journey synchronization, and safety-case escalation handling, which closes the gap between the domain model and the live care-orchestration workflow.
+

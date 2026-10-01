@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>Severity__c</fullName>
+<label>Severity</label>
+<type>Picklist</type>
+<required>true</required>
+<valueSet>
+<valueSetDefinition>
+<value>
+<fullName>Escalate</fullName>
+<default>false</default>
+<label>Escalate</label>
+</value>
+<value>
+<fullName>Review</fullName>
+<default>false</default>
+<label>Review</label>
+</value>
+</valueSetDefinition>
+</valueSet>
+</CustomField>

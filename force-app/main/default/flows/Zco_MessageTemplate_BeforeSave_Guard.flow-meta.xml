@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<apiVersion>67.0</apiVersion>
+<description>Reset approval fields when the template body changes to force re-approval.</description>
+<label>Zco_MessageTemplate_BeforeSave_Guard</label>
+<processMetadataValues>
+    <name>CanvasMode</name>
+    <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+</processMetadataValues>
+<processMetadataValues>
+    <name>OriginBuilderType</name>
+    <value><stringValue>LightningFlowBuilder</stringValue></value>
+</processMetadataValues>
+<recordCreates/>
+<recordLookups/>
+<recordUpdates/>
+<start>
+    <locationX>0</locationX>
+    <locationY>0</locationY>
+    <object>Message_Template__c</object>
+    <recordTriggerType>CreateAndUpdate</recordTriggerType>
+    <triggerType>RecordBeforeSave</triggerType>
+    <filterLogic>1</filterLogic>
+    <filters>
+        <field>Id</field>
+        <operator>IsNull</operator>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </filters>
+</start>
+<status>Draft</status>
+</Flow>

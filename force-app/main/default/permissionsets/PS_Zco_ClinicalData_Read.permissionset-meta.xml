@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+<label>PS_Zco_ClinicalData_Read</label>
+<description>Workbook-derived permission set for PS_Zco_ClinicalData_Read.</description>
+<hasActivationRequired>false</hasActivationRequired>
+<license>None</license>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Clinical_Observation__c</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Medication_Statement__c</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Extraction_Result__c</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+</PermissionSet>

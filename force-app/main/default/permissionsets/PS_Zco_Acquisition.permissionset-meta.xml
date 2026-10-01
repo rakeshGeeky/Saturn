@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+<label>PS_Zco_Acquisition</label>
+<description>Workbook-derived permission set for PS_Zco_Acquisition.</description>
+<hasActivationRequired>false</hasActivationRequired>
+<license>None</license>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Lead</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Opportunity</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Patient_Intake__c</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+<objectPermissions>
+<allowCreate>true</allowCreate>
+<allowDelete>false</allowDelete>
+<allowEdit>true</allowEdit>
+<allowRead>true</allowRead>
+<modifyAllRecords>false</modifyAllRecords>
+<object>Caregiver_Relationship__c</object>
+<viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+</PermissionSet>

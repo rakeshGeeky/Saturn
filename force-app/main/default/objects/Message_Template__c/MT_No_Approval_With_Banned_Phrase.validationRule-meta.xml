@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+<fullName>MT_No_Approval_With_Banned_Phrase</fullName>
+<active>true</active>
+<errorConditionFormula>NOT(ISBLANK(Banned_Phrase_Hit__c)) &amp;&amp; (Medical_Approved__c || Legal_Approved__c)</errorConditionFormula>
+<errorMessage>This template contains a banned phrase and cannot be approved.</errorMessage>
+</ValidationRule>
