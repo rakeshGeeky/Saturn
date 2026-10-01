@@ -4,4 +4,6 @@
 <label>High</label>
 <type>Number</type>
 <required>false</required>
+<precision>18</precision>
+<scale>4</scale>
 </CustomField>

@@ -13,10 +13,11 @@ public with sharing class ZcoOutreachService {
         }
 
         Set<String> blockedStatuses = new Set<String>{
-            'Inactive',
-            'Deceased',
-            'Opted Out',
-            'Do Not Contact'
+            'Paused',
+            'Completed',
+            'Churned',
+            'Refunded',
+            'Inactive'
         };
         return !blockedStatuses.contains(patient.Patient_Status__c);
     }

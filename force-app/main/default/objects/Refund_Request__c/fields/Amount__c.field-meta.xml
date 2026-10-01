@@ -4,4 +4,6 @@
 <label>Amount</label>
 <type>Currency</type>
 <required>true</required>
+<precision>18</precision>
+<scale>2</scale>
 </CustomField>

@@ -1,0 +1,85 @@
+<template>
+    <lightning-card title="Care Journey Workbench" icon-name="standard:service_appointment">
+        <div class="toolbar slds-p-horizontal_medium slds-p-top_small">
+            <p class="slds-text-color_weak">Open journeys, prioritized by next due date</p>
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                alternative-text="Refresh journeys"
+                title="Refresh journeys"
+                onclick={handleRefresh}
+            ></lightning-button-icon>
+        </div>
+
+        <template lwc:if={error}>
+            <div class="slds-p-around_medium">
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                    <span>{errorMessage}</span>
+                </div>
+            </div>
+        </template>
+
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading care journeys" size="small"></lightning-spinner>
+        </template>
+
+        <template lwc:if={hasData}>
+            <section class="metrics slds-p-horizontal_medium slds-p-vertical_small" aria-label="Journey summary">
+                <article class="metric">
+                    <span class="metric-label">Open</span>
+                    <strong>{dashboard.total}</strong>
+                </article>
+                <article class="metric due">
+                    <span class="metric-label">Due</span>
+                    <strong>{dashboard.due}</strong>
+                </article>
+                <article class="metric">
+                    <span class="metric-label">Outreach sent</span>
+                    <strong>{dashboard.outreachSent}</strong>
+                </article>
+                <article class="metric">
+                    <span class="metric-label">Snoozed</span>
+                    <strong>{dashboard.snoozed}</strong>
+                </article>
+                <article class="metric">
+                    <span class="metric-label">Lost to follow-up</span>
+                    <strong>{dashboard.lostToFollowUp}</strong>
+                </article>
+            </section>
+
+            <div class="filter slds-p-horizontal_medium slds-p-bottom_small">
+                <lightning-combobox
+                    label="Filter by status"
+                    value={statusFilter}
+                    options={statusOptions}
+                    onchange={handleStatusChange}
+                ></lightning-combobox>
+                <span class="slds-text-color_weak">{resultLabel}</span>
+            </div>
+
+            <template lwc:if={hasJourneys}>
+                <lightning-datatable
+                    key-field="id"
+                    data={visibleJourneys}
+                    columns={columns}
+                    hide-checkbox-column
+                    show-row-number-column
+                ></lightning-datatable>
+            </template>
+            <template lwc:else>
+                <div class="slds-p-around_large slds-text-align_center slds-text-color_weak">
+                    No journeys match this status.
+                </div>
+            </template>
+            <p class="slds-p-horizontal_medium slds-p-vertical_x-small slds-text-color_weak slds-text-body_small">
+                Showing the first 200 open journeys. Use the Care Journeys tab for the full list.
+            </p>
+        </template>
+
+        <template lwc:if={isEmpty}>
+            <div class="slds-p-around_large slds-text-align_center">
+                <p class="slds-text-heading_small">No open care journeys</p>
+                <p class="slds-text-color_weak">New and active patient follow-ups will appear here.</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

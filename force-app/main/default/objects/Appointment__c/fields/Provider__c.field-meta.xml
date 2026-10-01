@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>Provider__c</referenceTo>
 <relationshipLabel>Provider Records</relationshipLabel>
-<relationshipName>Provider</relationshipName>
+<relationshipName>AppointmentProvider</relationshipName>
 </CustomField>

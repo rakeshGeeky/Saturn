@@ -3,7 +3,6 @@
 <label>PS_Zco_Privacy</label>
 <description>Workbook-derived permission set for PS_Zco_Privacy.</description>
 <hasActivationRequired>false</hasActivationRequired>
-<license>None</license>
 <objectPermissions>
 <allowCreate>true</allowCreate>
 <allowDelete>false</allowDelete>

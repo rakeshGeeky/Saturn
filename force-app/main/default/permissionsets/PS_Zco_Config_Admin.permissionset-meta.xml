@@ -3,7 +3,10 @@
 <label>PS_Zco_Config_Admin</label>
 <description>Workbook-derived permission set for PS_Zco_Config_Admin.</description>
 <hasActivationRequired>false</hasActivationRequired>
-<license>None</license>
+<customPermissions>
+    <enabled>true</enabled>
+    <name>Zco_Bypass_Journey_Rules</name>
+</customPermissions>
 <objectPermissions>
 <allowCreate>true</allowCreate>
 <allowDelete>false</allowDelete>

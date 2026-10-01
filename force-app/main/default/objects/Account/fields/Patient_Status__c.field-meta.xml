@@ -3,7 +3,6 @@
 <fullName>Patient_Status__c</fullName>
 <label>Patient Status</label>
 <type>Picklist</type>
-<defaultValue>Active</defaultValue>
 <valueSet>
 <valueSetDefinition>
 <value>
@@ -43,5 +42,4 @@
 </value>
 </valueSetDefinition>
 </valueSet>
-<trackHistory>true</trackHistory>
 </CustomField>

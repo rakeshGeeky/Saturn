@@ -5,4 +5,5 @@
 <type>Lookup</type>
 <required>false</required>
 <referenceTo>Care_Journey__c</referenceTo>
+<relationshipName>CareTeamAssignmentCareJourney</relationshipName>
 </CustomField>

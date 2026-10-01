@@ -5,6 +5,7 @@
 <type>Lookup</type>
 <required>true</required>
 <referenceTo>Journey_Template__c</referenceTo>
+<deleteConstraint>Restrict</deleteConstraint>
 <relationshipLabel>Journey Template Records</relationshipLabel>
-<relationshipName>JourneyTemplate</relationshipName>
+<relationshipName>CareJourneyJourneyTemplate</relationshipName>
 </CustomField>

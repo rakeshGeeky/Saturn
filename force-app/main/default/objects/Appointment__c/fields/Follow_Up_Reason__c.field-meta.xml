@@ -4,5 +4,4 @@
 <label>Follow-Up Reason</label>
 <type>TextArea</type>
 <required>false</required>
-<length>255</length>
 </CustomField>
