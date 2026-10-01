@@ -71,6 +71,8 @@
         <members>ZcoThresholdService</members>
         <members>ZcoBannedPhraseService</members>
         <members>ZcoPatientMatchService</members>
+        <members>ZcoPatientSnapshotController</members>
+        <members>ZcoPatientSnapshotControllerTest</members>
         <members>ZcoOutreachService</members>
         <members>ZcoAppointmentService</members>
         <members>ZcoSafetyEscalationService</members>
@@ -87,6 +89,10 @@
         <members>Zco_CareJourney_AfterSave_StateRouter</members>
         <members>Zco_Appointment_AfterSave_Journey</members>
         <name>Flow</name>
+    </types>
+    <types>
+        <members>zcoPatientSnapshot</members>
+        <name>LightningComponentBundle</name>
     </types>
     <version>67.0</version>
 </Package>
