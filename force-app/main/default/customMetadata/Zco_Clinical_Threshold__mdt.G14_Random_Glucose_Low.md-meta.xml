@@ -15,10 +15,6 @@
 <value xsi:type="xsd:double">54</value>
 </values>
 <values>
-<field>High__c</field>
-<value xsi:type="xsd:string"></value>
-</values>
-<values>
 <field>Action__c</field>
 <value xsi:type="xsd:string">Safety case</value>
 </values>

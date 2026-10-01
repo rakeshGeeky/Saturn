@@ -15,7 +15,6 @@
 <enableStreamingApi>true</enableStreamingApi>
 <label>Message Template</label>
 <nameField>
-<displayFormat></displayFormat>
 <label>Message Template Name</label>
 <type>Text</type>
 </nameField>

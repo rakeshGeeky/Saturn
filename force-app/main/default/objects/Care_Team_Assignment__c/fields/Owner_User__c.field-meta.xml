@@ -3,6 +3,6 @@
 <fullName>Owner_User__c</fullName>
 <label>Owner User</label>
 <type>Lookup</type>
-<required>true</required>
 <referenceTo>User</referenceTo>
+<relationshipName>CareTeamAssignmentOwnerUser</relationshipName>
 </CustomField>

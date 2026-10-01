@@ -2,6 +2,6 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
 <fullName>PI_Caregiver_Needs_Patient_Consent</fullName>
 <active>true</active>
-<errorConditionFormula>RecordType.DeveloperName = 'Diabetes_Screener' &amp;&amp; ISPICKVAL(Status__c,'Submitted') &amp;&amp; NOT(ISPICKVAL(Enquiring_For__c,'Myself')) &amp;&amp; NOT(Patient_Consent_Confirmed__c)</errorConditionFormula>
+<errorConditionFormula>ISPICKVAL(Status__c,'Submitted') &amp;&amp; NOT(ISPICKVAL(Enquiring_For__c,'Myself')) &amp;&amp; NOT(Patient_Consent_Confirmed__c)</errorConditionFormula>
 <errorMessage>The patient must confirm consent before health questions are submitted.</errorMessage>
 </ValidationRule>

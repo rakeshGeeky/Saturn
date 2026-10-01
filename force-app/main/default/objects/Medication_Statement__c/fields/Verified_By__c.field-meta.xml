@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>User</referenceTo>
 <relationshipLabel>Verified By Records</relationshipLabel>
-<relationshipName>VerifiedBy</relationshipName>
+<relationshipName>MedicationStatementVerifiedBy</relationshipName>
 </CustomField>

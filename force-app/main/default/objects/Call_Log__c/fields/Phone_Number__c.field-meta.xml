@@ -4,5 +4,4 @@
 <label>Phone Number</label>
 <type>Phone</type>
 <required>false</required>
-<length>255</length>
 </CustomField>

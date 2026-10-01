@@ -4,4 +4,14 @@
 <label>Role</label>
 <type>Picklist</type>
 <required>false</required>
+<valueSet>
+<valueSetDefinition>
+<sorted>false</sorted>
+<value>
+<fullName>Standard</fullName>
+<default>true</default>
+<label>Standard</label>
+</value>
+</valueSetDefinition>
+</valueSet>
 </CustomField>

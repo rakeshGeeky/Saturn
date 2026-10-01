@@ -4,4 +4,6 @@
 <label>Step Number</label>
 <type>Number</type>
 <required>true</required>
+<precision>18</precision>
+<scale>0</scale>
 </CustomField>

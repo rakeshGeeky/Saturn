@@ -2,6 +2,6 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
 <fullName>CJ_Snooze_Needs_Date</fullName>
 <active>true</active>
-<errorConditionFormula>ISPICKVAL(State__c,'Snoozed') &amp;&amp; ISBLANK(Snooze_Until__c)</errorConditionFormula>
+<errorConditionFormula>ISPICKVAL(Status__c,'Snoozed') &amp;&amp; ISBLANK(Snooze_Until__c)</errorConditionFormula>
 <errorMessage>Snoozed journeys need a Snooze Until date.</errorMessage>
 </ValidationRule>

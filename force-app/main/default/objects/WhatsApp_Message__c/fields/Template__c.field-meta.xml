@@ -6,5 +6,5 @@
 <required>false</required>
 <referenceTo>Message_Template__c</referenceTo>
 <relationshipLabel>Template Records</relationshipLabel>
-<relationshipName>Template</relationshipName>
+<relationshipName>WhatsAppMessageTemplate</relationshipName>
 </CustomField>

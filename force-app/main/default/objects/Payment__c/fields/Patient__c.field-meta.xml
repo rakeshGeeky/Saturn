@@ -5,6 +5,7 @@
 <type>Lookup</type>
 <required>true</required>
 <referenceTo>Account</referenceTo>
+<deleteConstraint>Restrict</deleteConstraint>
 <relationshipLabel>Patient Records</relationshipLabel>
-<relationshipName>Patient</relationshipName>
+<relationshipName>PaymentPatient</relationshipName>
 </CustomField>
