@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Patient summary" icon-name="standard:person_account">
+        <template lwc:if={patientCard}>
+            <div class="slds-p-around_medium">
+                <p class="slds-text-heading_small">{patientName}</p>
+                <p class="slds-text-color_weak">MRN: {patientCard.mrn}</p>
+                <p>Journey status: <strong>{latestStatus}</strong></p>
+                <p>Next due: <strong>{nextDue}</strong></p>
+                <p>Open safety cases: <strong>{patientCard.openSafetyCases}</strong></p>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="slds-p-around_medium slds-text-color_weak">No patient summary available.</div>
+        </template>
+    </lightning-card>
+</template>

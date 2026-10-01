@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Pre-consult summary" icon-name="standard:service_appointment">
+        <template lwc:if={summary}>
+            <div class="slds-p-around_medium">
+                <p class="slds-text-heading_small">{summary.patientName}</p>
+                <p>Care plan: <strong>{summary.carePlanStatus}</strong></p>
+                <p>Next due: <strong>{summary.nextDueDate}</strong></p>
+
+                <template lwc:if={hasMedication}>
+                    <p class="slds-m-top_small"><strong>Verified medications</strong></p>
+                    <ul>
+                        <template for:each={summary.verifiedMedicationNames} for:item="medication">
+                            <li key={medication}>{medication}</li>
+                        </template>
+                    </ul>
+                </template>
+
+                <template lwc:if={hasObservations}>
+                    <p class="slds-m-top_small"><strong>Recent readings</strong></p>
+                    <ul>
+                        <template for:each={summary.recentObservationLabels} for:item="observation">
+                            <li key={observation}>{observation}</li>
+                        </template>
+                    </ul>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="slds-p-around_medium slds-text-color_weak">No pre-consult summary is available.</div>
+        </template>
+    </lightning-card>
+</template>
