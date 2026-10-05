@@ -2,7 +2,30 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Schedule and monitor open safety cases to ensure they are acknowledged and worked within the SLA window.</description>
+    <decisions>
+        <name>Check_Acknowledgment</name>
+        <label>Was the case acknowledged?</label>
+        <locationX>50</locationX>
+        <locationY>120</locationY>
+        <defaultConnector>
+            <targetReference>Set_SLA_Violation</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not acknowledged</defaultConnectorLabel>
+        <rules>
+            <name>Acknowledged</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Ack_At__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Acknowledged</label>
+        </rules>
+    </decisions>
+    <description>Scheduled path fired when a safety case misses its SLA acknowledgment window; flags the violation and creates an escalation task.</description>
+    <interviewLabel>Zco Case Scheduled SafetySLA {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Case_Scheduled_SafetySLA</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,12 +40,90 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Escalation_Task</name>
+        <label>Create escalation task</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>SLA breached - safety case not acknowledged</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordUpdates>
+        <name>Set_SLA_Violation</name>
+        <label>Set SLA violation</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <connector>
+            <targetReference>Create_Escalation_Task</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>SLAViolation__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Acknowledgment</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Safety_Escalation__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
         <object>Case</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>SLA_Due_Path</name>
+            <connector>
+                <targetReference>Check_Acknowledgment</targetReference>
+            </connector>
+            <label>At SLA due time</label>
+            <offsetNumber>0</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <recordField>SLA_Due_At__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

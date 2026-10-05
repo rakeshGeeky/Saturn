@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Counsellor team leads</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG_Zco_TeamLead</label>
+    <permissionSets>PS_Zco_Acquisition</permissionSets>
+    <permissionSets>PS_Zco_Acquisition_Lead</permissionSets>
+    <permissionSets>PS_Zco_Payments</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

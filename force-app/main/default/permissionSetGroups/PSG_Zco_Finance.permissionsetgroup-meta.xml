@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Finance team; platform licence possible</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG_Zco_Finance</label>
+    <permissionSets>PS_Zco_Finance</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

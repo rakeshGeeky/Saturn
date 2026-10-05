@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Startup counsellors</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG_Zco_Counsellor</label>
+    <permissionSets>PS_Zco_Acquisition</permissionSets>
+    <permissionSets>PS_Zco_Payments</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

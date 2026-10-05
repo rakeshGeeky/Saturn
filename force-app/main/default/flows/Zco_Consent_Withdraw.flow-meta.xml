@@ -2,7 +2,13 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Process opt-out consent changes and suppress patient outreach when consent is withdrawn.</description>
+    <description>When a contact opts out of a consent, suppress outreach on their patient account and raise a compliance task.</description>
+    <formulas>
+        <name>ComplianceTaskDueDate</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() + 1</expression>
+    </formulas>
+    <interviewLabel>Zco Consent Withdraw {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Consent_Withdraw</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,20 +23,97 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+    <recordCreates>
+        <name>Create_Compliance_Task</name>
+        <label>Create compliance task</label>
+        <locationX>50</locationX>
+        <locationY>480</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Consent withdrawn - confirm outreach suppression</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>Find_Contact.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>ComplianceTaskDueDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Find_Contact</name>
+        <label>Find contact</label>
+        <locationX>50</locationX>
+        <locationY>120</locationY>
+        <connector>
+            <targetReference>Suppress_Outreach</targetReference>
+        </connector>
         <filterLogic>1</filterLogic>
         <filters>
             <field>Id</field>
-            <operator>IsNull</operator>
+            <operator>EqualTo</operator>
             <value>
-                <booleanValue>false</booleanValue>
+                <elementReference>$Record.PartyId</elementReference>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Suppress_Outreach</name>
+        <label>Suppress outreach on account</label>
+        <locationX>50</locationX>
+        <locationY>300</locationY>
+        <connector>
+            <targetReference>Create_Compliance_Task</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Find_Contact.AccountId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Outreach_Suppressed__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Find_Contact</targetReference>
+        </connector>
+        <filterFormula>ISPICKVAL({!$Record.PrivacyConsentStatus}, &quot;OptOut&quot;)</filterFormula>
         <object>ContactPointTypeConsent</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

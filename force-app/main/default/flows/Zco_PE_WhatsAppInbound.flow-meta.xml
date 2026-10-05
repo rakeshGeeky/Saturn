@@ -1,8 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Match_Patient</name>
+        <label>Match patient by phone</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <actionName>ZcoMatchPatientByPhoneAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Find_Existing_Message</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>phoneNumber</name>
+            <value>
+                <elementReference>$Record.From__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoMatchPatientByPhoneAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Scan_Safety_Keywords</name>
+        <label>Scan safety keywords</label>
+        <locationX>176</locationX>
+        <locationY>720</locationY>
+        <actionName>ZcoScanSafetyKeywordsAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Safety_Keyword_Match</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>$Record.Text__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoScanSafetyKeywordsAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Escalate_Safety_Case</name>
+        <label>Escalate safety case</label>
+        <locationX>50</locationX>
+        <locationY>1080</locationY>
+        <actionName>ZcoEscalateSafetyCaseAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>subject</name>
+            <value>
+                <stringValue>Safety keyword detected in WhatsApp message</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>Match_Patient.patientId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>summary</name>
+            <value>
+                <elementReference>Scan_Safety_Keywords.matchSummary</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoEscalateSafetyCaseAction</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Process inbound WhatsApp events, upsert message records, and route patient replies or media payloads to the next workflow step.</description>
+    <decisions>
+        <name>Message_Already_Logged</name>
+        <label>Message already logged?</label>
+        <locationX>176</locationX>
+        <locationY>480</locationY>
+        <defaultConnector>
+            <targetReference>Create_WhatsApp_Message</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not logged yet</defaultConnectorLabel>
+        <rules>
+            <name>Already_Logged</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Existing_Message.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Already logged</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Safety_Keyword_Match</name>
+        <label>Safety keyword match?</label>
+        <locationX>176</locationX>
+        <locationY>840</locationY>
+        <defaultConnectorLabel>No match</defaultConnectorLabel>
+        <rules>
+            <name>Has_Match</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Scan_Safety_Keywords.hasMatch</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Message_Safety_Flag</targetReference>
+            </connector>
+            <label>Has match</label>
+        </rules>
+    </decisions>
+    <description>Receive inbound WhatsApp messages, match them to a patient, log them and escalate safety keyword hits.</description>
+    <interviewLabel>Zco PE WhatsApp Inbound {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_PE_WhatsAppInbound</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,12 +134,99 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_WhatsApp_Message</name>
+        <label>Create WhatsApp message</label>
+        <locationX>50</locationX>
+        <locationY>600</locationY>
+        <connector>
+            <targetReference>Scan_Safety_Keywords</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Direction__c</field>
+            <value>
+                <stringValue>Inbound</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Patient__c</field>
+            <value>
+                <elementReference>Match_Patient.patientId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Message_Body__c</field>
+            <value>
+                <elementReference>$Record.Text__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Provider_Message_Id__c</field>
+            <value>
+                <elementReference>$Record.Provider_Message_Id__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Button_Payload__c</field>
+            <value>
+                <elementReference>$Record.Button_Payload__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>WhatsApp_Message__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Find_Existing_Message</name>
+        <label>Find existing message</label>
+        <locationX>176</locationX>
+        <locationY>360</locationY>
+        <connector>
+            <targetReference>Message_Already_Logged</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Provider_Message_Id__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Provider_Message_Id__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>WhatsApp_Message__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Message_Safety_Flag</name>
+        <label>Flag message as safety hit</label>
+        <locationX>50</locationX>
+        <locationY>960</locationY>
+        <connector>
+            <targetReference>Escalate_Safety_Case</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Create_WhatsApp_Message.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Safety_Keyword_Hit__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>WhatsApp_Message__c</object>
+    </recordUpdates>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
-        <flowRunAsUser>TriggeringUser</flowRunAsUser>
+        <connector>
+            <targetReference>Match_Patient</targetReference>
+        </connector>
         <object>Zco_WhatsApp_Inbound__e</object>
         <triggerType>PlatformEvent</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

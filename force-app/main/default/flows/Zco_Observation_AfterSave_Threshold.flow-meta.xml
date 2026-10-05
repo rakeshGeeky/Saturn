@@ -1,8 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Evaluate_Threshold</name>
+        <label>Evaluate observation threshold</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <actionName>ZcoEvaluateObservationThresholdAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>observationId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoEvaluateObservationThresholdAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Evaluate clinical thresholds after an observation is added or verified.</description>
+    <decisions>
+        <name>Needs_Escalation</name>
+        <label>Needs escalation?</label>
+        <locationX>50</locationX>
+        <locationY>480</locationY>
+        <defaultConnectorLabel>No action needed</defaultConnectorLabel>
+        <rules>
+            <name>Escalate_Required</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Evaluate_Threshold.outsideThreshold</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Evaluate_Threshold.actionRequired</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalate</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Escalate_Safety</targetReference>
+            </connector>
+            <label>Escalate required</label>
+        </rules>
+        <rules>
+            <name>Monitor_Required</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Evaluate_Threshold.outsideThreshold</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Evaluate_Threshold.actionRequired</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Monitor</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Monitoring_Task</targetReference>
+            </connector>
+            <label>Monitor required</label>
+        </rules>
+    </decisions>
+    <description>Evaluate a clinical observation against safety thresholds and escalate or create a monitoring task.</description>
+    <interviewLabel>Zco Observation AfterSave Threshold {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Observation_AfterSave_Threshold</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,20 +87,78 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <filterLogic>1</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>IsNull</operator>
+    <recordCreates>
+        <name>Create_Monitoring_Task</name>
+        <label>Create monitoring task</label>
+        <locationX>176</locationX>
+        <locationY>600</locationY>
+        <inputAssignments>
+            <field>Subject</field>
             <value>
-                <booleanValue>false</booleanValue>
+                <stringValue>Observation outside threshold - monitor patient</stringValue>
             </value>
-        </filters>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>Evaluate_Threshold.thresholdRule</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Evaluate_Threshold</targetReference>
+        </connector>
+        <filterFormula>OR(ISNEW(), ISCHANGED({!$Record.Value__c}))</filterFormula>
         <object>Clinical_Observation__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
+    <subflows>
+        <name>Escalate_Safety</name>
+        <label>Escalate safety</label>
+        <locationX>50</locationX>
+        <locationY>600</locationY>
+        <flowName>Zco_Safety_Escalate</flowName>
+        <inputAssignments>
+            <name>vSubject</name>
+            <value>
+                <stringValue>Clinical observation outside safe threshold</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>vPatientId</name>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>vSummary</name>
+            <value>
+                <elementReference>Evaluate_Threshold.thresholdRule</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
 </Flow>

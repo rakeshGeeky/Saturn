@@ -1,8 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Safety_Template</name>
+        <label>Send safety template</label>
+        <locationX>176</locationX>
+        <locationY>840</locationY>
+        <actionName>ZcoSendTemplateMessageAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>vPatientId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateKey</name>
+            <value>
+                <stringValue>SAFETY_ESCALATION</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoSendTemplateMessageAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Create or deduplicate safety escalation cases and notify follow-up teams.</description>
+    <decisions>
+        <name>Case_Already_Open</name>
+        <label>Case already open?</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <defaultConnector>
+            <targetReference>Create_Safety_Case</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No existing case</defaultConnectorLabel>
+        <rules>
+            <name>Case_Open</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Open_Safety_Case.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Increment_Existing_Case</targetReference>
+            </connector>
+            <label>Case open</label>
+        </rules>
+    </decisions>
+    <description>Create or deduplicate a safety escalation case for a patient and notify the care team.</description>
+    <formulas>
+        <name>Incremented_Trigger_Count</name>
+        <dataType>Number</dataType>
+        <scale>0</scale>
+        <expression>IF(ISBLANK({!Find_Open_Safety_Case.Trigger_Count__c}), 2, {!Find_Open_Safety_Case.Trigger_Count__c} + 1)</expression>
+    </formulas>
+    <interviewLabel>Zco Safety Escalate {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Safety_Escalate</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,20 +73,145 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <filterLogic>1</filterLogic>
+    <recordCreates>
+        <name>Create_Safety_Case</name>
+        <label>Create safety case</label>
+        <locationX>300</locationX>
+        <locationY>360</locationY>
+        <connector>
+            <targetReference>Send_Safety_Template</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>vSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>vSummary</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value>
+                <elementReference>vPatientId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Safety_Escalation__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Trigger_Count__c</field>
+            <value>
+                <numberValue>1</numberValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Find_Open_Safety_Case</name>
+        <label>Find open safety case</label>
+        <locationX>176</locationX>
+        <locationY>120</locationY>
+        <connector>
+            <targetReference>Case_Already_Open</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND 3</filterLogic>
         <filters>
-            <field>Id</field>
-            <operator>IsNull</operator>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>vPatientId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Safety_Escalation__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
             <value>
                 <booleanValue>false</booleanValue>
             </value>
         </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Case</object>
-        <recordTriggerType>CreateAndUpdate</recordTriggerType>
-        <triggerType>RecordAfterSave</triggerType>
+        <sortField>CreatedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Increment_Existing_Case</name>
+        <label>Increment existing case</label>
+        <locationX>50</locationX>
+        <locationY>600</locationY>
+        <connector>
+            <targetReference>Send_Safety_Template</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Find_Open_Safety_Case.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Trigger_Count__c</field>
+            <value>
+                <elementReference>Incremented_Trigger_Count</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>vSummary</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Find_Open_Safety_Case</targetReference>
+        </connector>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
+    <variables>
+        <name>vSubject</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>vPatientId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>vSummary</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
 </Flow>

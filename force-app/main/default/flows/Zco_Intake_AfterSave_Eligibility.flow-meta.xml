@@ -1,8 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Evaluate_Eligibility</name>
+        <label>Evaluate eligibility</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <actionName>ZcoEvaluateIntakeEligibilityAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>intakeId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoEvaluateIntakeEligibilityAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Decline_Template</name>
+        <label>Send decline template</label>
+        <locationX>50</locationX>
+        <locationY>720</locationY>
+        <actionName>ZcoSendTemplateMessageAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateKey</name>
+            <value>
+                <stringValue>INTAKE_DECLINED</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoSendTemplateMessageAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Holding_Template</name>
+        <label>Send holding template</label>
+        <locationX>176</locationX>
+        <locationY>720</locationY>
+        <actionName>ZcoSendTemplateMessageAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateKey</name>
+            <value>
+                <elementReference>Evaluate_Eligibility.holdingTemplateKey</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoSendTemplateMessageAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Evaluate a patient intake against eligibility rules and route the result to the correct care workflow.</description>
+    <decisions>
+        <name>Eligibility_Outcome</name>
+        <label>Eligibility outcome?</label>
+        <locationX>50</locationX>
+        <locationY>600</locationY>
+        <defaultConnectorLabel>Eligible</defaultConnectorLabel>
+        <rules>
+            <name>Decline</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Evaluate_Eligibility.outcome</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Decline</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Decline_Template</targetReference>
+            </connector>
+            <label>Decline</label>
+        </rules>
+        <rules>
+            <name>Hold_For_Review</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Evaluate_Eligibility.outcome</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>HoldForReview</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Holding_Template</targetReference>
+            </connector>
+            <label>Hold for review</label>
+        </rules>
+    </decisions>
+    <description>Evaluate patient intake eligibility rules, update the intake status and notify the patient of the outcome.</description>
+    <formulas>
+        <name>IntakeStatusText</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Evaluate_Eligibility.outcome}, "Decline", "Not suitable", "HoldForReview", "Doctor review", "Eligible")</expression>
+    </formulas>
+    <interviewLabel>Zco Intake AfterSave Eligibility {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Intake_AfterSave_Eligibility</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,12 +126,40 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Intake_Status</name>
+        <label>Update intake status</label>
+        <locationX>50</locationX>
+        <locationY>480</locationY>
+        <connector>
+            <targetReference>Eligibility_Outcome</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Eligibility_Status__c</field>
+            <value>
+                <elementReference>IntakeStatusText</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Patient_Intake__c</object>
+    </recordUpdates>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Evaluate_Eligibility</targetReference>
+        </connector>
+        <filterFormula>ISPICKVAL({!$Record.Status__c}, &quot;Submitted&quot;)</filterFormula>
         <object>Patient_Intake__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

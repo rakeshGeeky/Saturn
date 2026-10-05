@@ -1,8 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Post_Visit_Template</name>
+        <label>Send post-visit template</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <actionName>ZcoSendTemplateMessageAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateKey</name>
+            <value>
+                <stringValue>POST_VISIT_SUMMARY</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoSendTemplateMessageAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Keep appointment and care journey state aligned after booking or rescheduling.</description>
+    <decisions>
+        <name>Appointment_Status</name>
+        <label>Appointment status?</label>
+        <locationX>50</locationX>
+        <locationY>120</locationY>
+        <defaultConnectorLabel>No action</defaultConnectorLabel>
+        <rules>
+            <name>Completed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Journey_On_Complete</targetReference>
+            </connector>
+            <label>Completed</label>
+        </rules>
+        <rules>
+            <name>No_Show</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>No show</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_NoShow_Task</targetReference>
+            </connector>
+            <label>No show</label>
+        </rules>
+        <rules>
+            <name>Cancelled</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Cancelled</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Reschedule_Task</targetReference>
+            </connector>
+            <label>Cancelled</label>
+        </rules>
+    </decisions>
+    <description>React to an appointment status change by updating the linked care journey and notifying or tasking the care team.</description>
+    <interviewLabel>Zco Appointment AfterSave Journey {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Appointment_AfterSave_Journey</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,20 +94,96 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+    <recordCreates>
+        <name>Create_NoShow_Task</name>
+        <label>Create no-show task</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Patient no-show - reschedule</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Care_Journey__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Reschedule_Task</name>
+        <label>Create reschedule task</label>
+        <locationX>302</locationX>
+        <locationY>240</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Appointment cancelled - reschedule</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Care_Journey__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordUpdates>
+        <name>Update_Journey_On_Complete</name>
+        <label>Update journey on complete</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <connector>
+            <targetReference>Send_Post_Visit_Template</targetReference>
+        </connector>
         <filterLogic>1</filterLogic>
         <filters>
             <field>Id</field>
-            <operator>IsNull</operator>
+            <operator>EqualTo</operator>
             <value>
-                <booleanValue>false</booleanValue>
+                <elementReference>$Record.Care_Journey__c</elementReference>
             </value>
         </filters>
+        <inputAssignments>
+            <field>Last_Consult_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>State__c</field>
+            <value>
+                <stringValue>Consulted</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Care_Journey__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Appointment_Status</targetReference>
+        </connector>
+        <filterFormula>ISCHANGED({!$Record.Status__c})</filterFormula>
         <object>Appointment__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

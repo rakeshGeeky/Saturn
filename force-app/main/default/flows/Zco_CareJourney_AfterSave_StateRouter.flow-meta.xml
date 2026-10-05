@@ -1,8 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Checkin_Template</name>
+        <label>Send check-in template</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <actionName>ZcoSendTemplateMessageAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateKey</name>
+            <value>
+                <stringValue>JOURNEY_DUE_CHECKIN</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoSendTemplateMessageAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Preconsult_Template</name>
+        <label>Send pre-consult ready template</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <actionName>ZcoSendTemplateMessageAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>patientId</name>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>templateKey</name>
+            <value>
+                <stringValue>PRE_CONSULT_READY</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoSendTemplateMessageAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Route care journey state transitions and trigger outreach or follow-up tasks.</description>
+    <decisions>
+        <name>State_Router</name>
+        <label>Care journey state?</label>
+        <locationX>50</locationX>
+        <locationY>120</locationY>
+        <defaultConnectorLabel>No action</defaultConnectorLabel>
+        <rules>
+            <name>Due</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.State__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Due</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Checkin_Template</targetReference>
+            </connector>
+            <label>Due</label>
+        </rules>
+        <rules>
+            <name>Lost_To_FollowUp</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.State__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Lost to follow-up</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_LTFU_Task</targetReference>
+            </connector>
+            <label>Lost to follow-up</label>
+        </rules>
+        <rules>
+            <name>Pre_Consult_Ready</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.State__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pre-consult ready</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Preconsult_Template</targetReference>
+            </connector>
+            <label>Pre-consult ready</label>
+        </rules>
+    </decisions>
+    <description>Route a care journey after its State changes to the appropriate outreach action.</description>
+    <interviewLabel>Zco CareJourney AfterSave StateRouter {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_CareJourney_AfterSave_StateRouter</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,20 +118,41 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <filterLogic>1</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>IsNull</operator>
+    <recordCreates>
+        <name>Create_LTFU_Task</name>
+        <label>Create lost-to-follow-up task</label>
+        <locationX>88</locationX>
+        <locationY>240</locationY>
+        <inputAssignments>
+            <field>Subject</field>
             <value>
-                <booleanValue>false</booleanValue>
+                <stringValue>Patient lost to follow-up - outreach required</stringValue>
             </value>
-        </filters>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>State_Router</targetReference>
+        </connector>
+        <filterFormula>ISCHANGED({!$Record.State__c})</filterFormula>
         <object>Care_Journey__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

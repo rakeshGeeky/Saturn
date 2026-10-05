@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Match_Patient</name>
+        <label>Match patient by phone</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <actionName>ZcoMatchPatientByPhoneAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Find_Existing_Call_Log</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>phoneNumber</name>
+            <value>
+                <elementReference>$Record.From__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoMatchPatientByPhoneAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Match inbound call events to a patient or lead and publish the screen-pop action for the answering agent.</description>
+    <decisions>
+        <name>Log_Already_Exists</name>
+        <label>Log already exists?</label>
+        <locationX>176</locationX>
+        <locationY>480</locationY>
+        <defaultConnector>
+            <targetReference>Create_Call_Log</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No existing log</defaultConnectorLabel>
+        <rules>
+            <name>Log_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Existing_Call_Log.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Call_Log</targetReference>
+            </connector>
+            <label>Log found</label>
+        </rules>
+    </decisions>
+    <description>Receive the TeleCMI call event platform event, match the caller to a patient and upsert a Call Log record.</description>
+    <interviewLabel>Zco PE Call Event {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_PE_CallEvent</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,12 +64,92 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Call_Log</name>
+        <label>Create call log</label>
+        <locationX>50</locationX>
+        <locationY>600</locationY>
+        <inputAssignments>
+            <field>Correlation_Id__c</field>
+            <value>
+                <elementReference>$Record.Call_Id__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Phone_Number__c</field>
+            <value>
+                <elementReference>$Record.From__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Direction__c</field>
+            <value>
+                <stringValue>Inbound</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Started_At__c</field>
+            <value>
+                <elementReference>$Record.Timestamp__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Patient__c</field>
+            <value>
+                <elementReference>Match_Patient.patientId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Call_Log__c</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Find_Existing_Call_Log</name>
+        <label>Find existing call log</label>
+        <locationX>176</locationX>
+        <locationY>360</locationY>
+        <connector>
+            <targetReference>Log_Already_Exists</targetReference>
+        </connector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Correlation_Id__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Call_Id__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Call_Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Call_Log</name>
+        <label>Update call log</label>
+        <locationX>300</locationX>
+        <locationY>600</locationY>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Correlation_Id__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Call_Id__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Patient__c</field>
+            <value>
+                <elementReference>Match_Patient.patientId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Call_Log__c</object>
+    </recordUpdates>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
-        <flowRunAsUser>TriggeringUser</flowRunAsUser>
+        <connector>
+            <targetReference>Match_Patient</targetReference>
+        </connector>
         <object>Zco_Call_Event__e</object>
         <triggerType>PlatformEvent</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

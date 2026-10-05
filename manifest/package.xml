@@ -44,7 +44,6 @@
         <members>Zco_Payment_Event__e</members>
         <members>Zco_Courier_Event__e</members>
         <members>Zco_Lab_Event__e</members>
-        <members>Health_Assessment__c</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -108,18 +107,18 @@
         <members>Clinical_Observation__c.Outside_Threshold__c</members>
         <members>Clinical_Observation__c.Threshold_Rule__c</members>
         <members>Clinical_Observation__c.Action_Required__c</members>
-        <members>Health_Assessment__c.*</members>
         <name>CustomField</name>
     </types>
     <types>
         <members>Appointment__c</members>
         <members>Care_Journey__c</members>
         <members>Clinical_Observation__c</members>
-        <members>Health_Assessment__c</members>
         <members>Medication_Statement__c</members>
         <members>Patient_Intake__c</members>
         <members>WhatsApp_Message__c</members>
         <members>Zco_Care_Workbench</members>
+        <members>Journey_Template__c</members>
+        <members>Message_Template__c</members>
         <name>CustomTab</name>
     </types>
     <types>
@@ -145,6 +144,15 @@
         <members>PS_Zco_Config_Admin</members>
         <members>PS_Zco_Privacy</members>
         <members>PS_Zco_Integration</members>
+        <members>PS_Zco_Acquisition_Lead</members>
+        <members>PS_Zco_Partners</members>
+        <members>PS_Zco_Payments</members>
+        <members>PS_Zco_Finance</members>
+        <members>PS_Zco_Devices</members>
+        <members>PS_Zco_Support</members>
+        <members>PS_Zco_Template_Approver_Medical</members>
+        <members>PS_Zco_Template_Approver_Legal</members>
+        <members>PS_Zco_Webhook_Guest</members>
         <name>PermissionSet</name>
     </types>
     <types>
@@ -153,6 +161,13 @@
         <members>PSG_Zco_ConfigAdmin</members>
         <members>PSG_Zco_PrivacyOfficer</members>
         <members>PSG_Zco_Integration</members>
+        <members>PSG_Zco_Clinician</members>
+        <members>PSG_Zco_Counsellor</members>
+        <members>PSG_Zco_TeamLead</members>
+        <members>PSG_Zco_PartnerManager</members>
+        <members>PSG_Zco_DeviceOps</members>
+        <members>PSG_Zco_Support</members>
+        <members>PSG_Zco_Finance</members>
         <name>PermissionSetGroup</name>
     </types>
     <types>
@@ -191,6 +206,22 @@
         <members>ZcoCareJourneyTriggerHandlerTest</members>
         <members>ZcoMessageTemplateTriggerHandler</members>
         <members>ZcoMessageTemplateTriggerHandlerTest</members>
+        <members>ZcoMatchPatientByPhoneAction</members>
+        <members>ZcoMatchPatientByPhoneActionTest</members>
+        <members>ZcoScanBannedPhraseAction</members>
+        <members>ZcoScanBannedPhraseActionTest</members>
+        <members>ZcoScanSafetyKeywordsAction</members>
+        <members>ZcoScanSafetyKeywordsActionTest</members>
+        <members>ZcoEvaluateObservationThresholdAction</members>
+        <members>ZcoEvalObsThresholdActionTest</members>
+        <members>ZcoSendTemplateMessageAction</members>
+        <members>ZcoSendTemplateMessageActionTest</members>
+        <members>ZcoCaptureConsentAction</members>
+        <members>ZcoCaptureConsentActionTest</members>
+        <members>ZcoEscalateSafetyCaseAction</members>
+        <members>ZcoEscalateSafetyCaseActionTest</members>
+        <members>ZcoEvaluateIntakeEligibilityAction</members>
+        <members>ZcoEvaluateIntakeEligibilityActionTest</members>
         <name>ApexClass</name>
     </types>
     <types>

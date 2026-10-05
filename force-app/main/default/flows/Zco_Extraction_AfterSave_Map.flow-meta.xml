@@ -2,7 +2,55 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Map extracted clinical values into Medication_Statement__c and Clinical_Observation__c records for verification workflows.</description>
+    <decisions>
+        <name>Document_Type</name>
+        <label>Document type?</label>
+        <locationX>50</locationX>
+        <locationY>120</locationY>
+        <defaultConnector>
+            <targetReference>Mark_Extracted</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Unsupported document type</defaultConnectorLabel>
+        <rules>
+            <name>Is_Prescription</name>
+            <conditionLogic>1 OR 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Document_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Handwritten prescription</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Document_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Printed prescription</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Medication_Statement</targetReference>
+            </connector>
+            <label>Is prescription</label>
+        </rules>
+        <rules>
+            <name>Is_Lab_Report</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Document_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Lab report</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Clinical_Observation</targetReference>
+            </connector>
+            <label>Is lab report</label>
+        </rules>
+    </decisions>
+    <description>Route a completed document extraction result to the appropriate clinical record and mark it extracted.</description>
+    <interviewLabel>Zco Extraction AfterSave Map {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_Extraction_AfterSave_Map</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,12 +65,117 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Medication_Statement</name>
+        <label>Create medication statement</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <connector>
+            <targetReference>Mark_Extracted</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Patient__c</field>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Extraction_Result__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Source__c</field>
+            <value>
+                <stringValue>Prescription extraction</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Current</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Medication_Statement__c</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Clinical_Observation</name>
+        <label>Create clinical observation</label>
+        <locationX>176</locationX>
+        <locationY>240</locationY>
+        <connector>
+            <targetReference>Mark_Extracted</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Patient__c</field>
+            <value>
+                <elementReference>$Record.Patient__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Source_Record_Id__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Source__c</field>
+            <value>
+                <stringValue>Manual</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type__c</field>
+            <value>
+                <stringValue>Random glucose</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Value__c</field>
+            <value>
+                <numberValue>0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Observed_On__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Clinical_Observation__c</object>
+    </recordCreates>
+    <recordUpdates>
+        <name>Mark_Extracted</name>
+        <label>Mark extracted</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Extraction_Status__c</field>
+            <value>
+                <stringValue>Processed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Extraction_Result__c</object>
+    </recordUpdates>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Document_Type</targetReference>
+        </connector>
+        <filterFormula>AND(ISCHANGED({!$Record.Status__c}), ISPICKVAL({!$Record.Status__c}, &quot;Extracted&quot;))</filterFormula>
         <object>Extraction_Result__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>

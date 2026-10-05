@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Scan_Banned_Phrase</name>
+        <label>Scan banned phrase</label>
+        <locationX>50</locationX>
+        <locationY>120</locationY>
+        <actionName>ZcoScanBannedPhraseAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Update_Scan_Results</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>$Record.Template_Body__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ZcoScanBannedPhraseAction</nameSegment>
+        <versionSegment>1</versionSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Run banned phrase scanning after a message template is created or updated.</description>
+    <description>Scan message template bodies for banned marketing/clinical phrases and gate whether they are sendable.</description>
+    <interviewLabel>Zco MessageTemplate AfterSave Scan {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Zco_MessageTemplate_AfterSave_Scan</label>
     <processMetadataValues>
         <name>CanvasMode</name>
@@ -17,20 +39,37 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+    <recordUpdates>
+        <name>Update_Scan_Results</name>
+        <label>Update scan results</label>
+        <locationX>50</locationX>
+        <locationY>240</locationY>
+        <inputAssignments>
+            <field>Banned_Phrase_Hit__c</field>
+            <value>
+                <elementReference>Scan_Banned_Phrase.hitPhrase</elementReference>
+            </value>
+        </inputAssignments>
         <filterLogic>1</filterLogic>
         <filters>
             <field>Id</field>
-            <operator>IsNull</operator>
+            <operator>EqualTo</operator>
             <value>
-                <booleanValue>false</booleanValue>
+                <elementReference>$Record.Id</elementReference>
             </value>
         </filters>
+        <object>Message_Template__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Scan_Banned_Phrase</targetReference>
+        </connector>
+        <filterFormula>OR(ISNEW(), ISCHANGED({!$Record.Template_Key__c}), ISCHANGED({!$Record.Legal_Approved__c}), ISCHANGED({!$Record.Medical_Approved__c}), ISCHANGED({!$Record.Active__c}))</filterFormula>
         <object>Message_Template__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
 </Flow>
