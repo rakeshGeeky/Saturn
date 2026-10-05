@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Objection__c</fullName>
+    <label>Primary Objection</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Stop my medicines?</fullName>
+                <default>false</default>
+                <label>Stop my medicines?</label>
+            </value>
+            <value>
+                <fullName>Fear of CGM needle</fullName>
+                <default>false</default>
+                <label>Fear of CGM needle</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Family approval</fullName>
+                <default>false</default>
+                <label>Family approval</label>
+            </value>
+            <value>
+                <fullName>Tried before</fullName>
+                <default>false</default>
+                <label>Tried before</label>
+            </value>
+            <value>
+                <fullName>Doctor not on board</fullName>
+                <default>false</default>
+                <label>Doctor not on board</label>
+            </value>
+            <value>
+                <fullName>Diet too strict</fullName>
+                <default>false</default>
+                <label>Diet too strict</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

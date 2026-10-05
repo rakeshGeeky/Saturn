@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Outcome_Review_Date__c</fullName>
+    <label>Outcome Review Date</label>
+    <formula>Start_Date__c + 80</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <type>Date</type>
+    <required>false</required>
+</CustomField>

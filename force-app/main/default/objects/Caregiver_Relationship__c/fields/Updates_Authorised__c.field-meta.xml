@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Updates_Authorised__c</fullName>
+    <label>Updates Authorised</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>None</fullName>
+                <default>true</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>Payments &amp; logistics</fullName>
+                <default>false</default>
+                <label>Payments &amp; logistics</label>
+            </value>
+            <value>
+                <fullName>Weekly progress</fullName>
+                <default>false</default>
+                <label>Weekly progress</label>
+            </value>
+            <value>
+                <fullName>Full outcomes</fullName>
+                <default>false</default>
+                <label>Full outcomes</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

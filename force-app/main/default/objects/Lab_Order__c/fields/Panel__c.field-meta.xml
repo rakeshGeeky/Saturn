@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Panel__c</fullName>
+    <label>Panel</label>
+    <type>MultiselectPicklist</type>
+    <visibleLines>4</visibleLines>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>HbA1c</fullName>
+                <default>false</default>
+                <label>HbA1c</label>
+            </value>
+            <value>
+                <fullName>Fasting/PP glucose</fullName>
+                <default>false</default>
+                <label>Fasting/PP glucose</label>
+            </value>
+            <value>
+                <fullName>Lipid profile</fullName>
+                <default>false</default>
+                <label>Lipid profile</label>
+            </value>
+            <value>
+                <fullName>Kidney function</fullName>
+                <default>false</default>
+                <label>Kidney function</label>
+            </value>
+            <value>
+                <fullName>Liver function</fullName>
+                <default>false</default>
+                <label>Liver function</label>
+            </value>
+            <value>
+                <fullName>TSH</fullName>
+                <default>false</default>
+                <label>TSH</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

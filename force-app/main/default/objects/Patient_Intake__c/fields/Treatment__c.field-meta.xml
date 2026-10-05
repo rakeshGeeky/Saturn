@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Treatment__c</fullName>
+    <label>Treatment</label>
+    <type>MultiselectPicklist</type>
+    <visibleLines>4</visibleLines>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Lifestyle only</fullName>
+                <default>false</default>
+                <label>Lifestyle only</label>
+            </value>
+            <value>
+                <fullName>Tablets (1-2)</fullName>
+                <default>false</default>
+                <label>Tablets (1-2)</label>
+            </value>
+            <value>
+                <fullName>Tablets (3+)</fullName>
+                <default>false</default>
+                <label>Tablets (3+)</label>
+            </value>
+            <value>
+                <fullName>Insulin</fullName>
+                <default>false</default>
+                <label>Insulin</label>
+            </value>
+            <value>
+                <fullName>GLP-1 injections</fullName>
+                <default>false</default>
+                <label>GLP-1 injections</label>
+            </value>
+            <value>
+                <fullName>Not sure</fullName>
+                <default>false</default>
+                <label>Not sure</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

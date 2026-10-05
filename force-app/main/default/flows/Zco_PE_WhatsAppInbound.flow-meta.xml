@@ -11,15 +11,11 @@
         <name>OriginBuilderType</name>
         <value><stringValue>LightningFlowBuilder</stringValue></value>
     </processMetadataValues>
-    <recordCreates/>
-    <recordLookups/>
-    <recordUpdates/>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <object>Zco_WhatsApp_Inbound__e</object>
-        <recordTriggerType>PlatformEvent</recordTriggerType>
-        <triggerType>RecordAfterSave</triggerType>
+        <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Draft</status>
 </Flow>

@@ -58,47 +58,10 @@ Transform your ideas into custom Lightning apps that extend CRM workflows direct
 
 ## Workbook-Driven Implementation Status
 
-The repository now includes the initial Salesforce metadata skeleton derived from the Zime Care Orchestration workbook.
+This repository is a partial implementation of the Zime Care Orchestration workbook, not a completed workbook build. Several earlier Flow files were created as Draft metadata shells and had no executable elements. Only the Account mobile normalization and message-template approval guard flows currently contain logic and are active.
 
-Coverage so far includes:
-- Core patient-journey domain objects and fields
-- Account-level identifiers and operational flags for the patient engagement flow
-- Core Apex automation stubs for journey transitions, messaging, phone normalization, FHIR lookups, and due processing
-- A deployment manifest for the initial build set
+The implemented record pages in `force-app/main/default/flexipages` place patient summary components on Account, Care Journey, Patient Intake, and Appointment record pages. Deploying a FlexiPage makes it available in Lightning App Builder; it must still be activated for the required app, record type, and profile in the target org.
 
-This is the foundation for the remaining modules in the workbook (security, custom metadata, flows, LWC, and integrations), which can be added in subsequent implementation passes.
+The care-journey and pre-consult components resolve their patient context from supported record types and surface query errors instead of rendering an empty state. Other Flow shells, integrations, and workbook backlog items remain pending and must not be treated as production-ready.
 
-The implementation now also includes workbook-aligned workflow services for consent capture, safety keyword scanning, clinical threshold handling, banned phrase validation, and patient matching, which mirror the major orchestration patterns in the workbook.
-
-The flow layer has been extended with workbook-based record-triggered flow metadata for account normalization, message-template approval guardrails, banned-phrase scans, clinical-threshold evaluation, consent capture/withdrawal, safety escalation, journey state routing, and appointment synchronization, covering the next wave of the orchestration automation described in the workbook.
-
-The implementation continues with workbook-aligned service logic for patient outreach eligibility, appointment-driven journey synchronization, and safety-case escalation handling, which closes the gap between the domain model and the live care-orchestration workflow.
-
-The patient clinical snapshot LWC is exposed for Account record pages. Add **Zime Patient Clinical Snapshot** in Lightning App Builder to the patient Account record page. It displays only verified observations and current verified medications, with the latest ten of each. Users need `PS_Zco_ClinicalData_Read`, record-level access, and read access to the queried clinical fields. The component does not interpret values as clinical advice.
-## Lightning App
-
-The **Zime Care Orchestration** Lightning app brings patient Accounts, Leads, Opportunities, care journeys, appointments, patient intake, clinical observations, medication statements, messages, tasks, safety cases, reports, and dashboards into one navigation bar. Care-team users can open the app from the Salesforce App Launcher after deployment and receive app/tab access through their assigned profiles or permission sets.
-
-Care journey state changes are now guarded by `CareJourneyTrigger` against the workbook transition map, with an admin bypass custom permission. The daily due batch implements the workbook's due, snooze expiry, outreach retry-gap, future-appointment exclusion, and lost-to-follow-up checks. Due care journeys can be processed on a schedule by `ZcoJourneyDueScheduler`. Schedule it from Execute Anonymous after deployment, choosing an agreed local time:
-
-```apex
-System.schedule(
-    'ZCO Daily Journey Due Processing',
-    '0 0 2 * * ?',
-    new ZcoJourneyDueScheduler()
-);
-```
-
-
-## Validate and Deploy
-
-After authenticating your Salesforce org with `sf org login web --alias <alias>`, validate the source before deploying:
-
-```sh
-sf project deploy validate --source-dir force-app --target-org <alias> --test-level RunLocalTests
-sf project deploy start --source-dir force-app --target-org <alias> --test-level RunLocalTests
-```
-
-The validation command performs a check-only deployment; the start command applies the metadata. The workbook implementation was validated against the connected development org with local Apex tests.
-
-The workbook backlog is not fully complete. Remaining work includes integrating actual WhatsApp/TeleCMI/FHIR/scheduler services, completing the draft flows and safety/consent suppression behavior, creating patient and coordinator Lightning record pages/components, and resolving org setup decisions such as Person Accounts, named credentials, queues, and clinical configuration with the org owner.
+The patient clinical snapshot LWC is exposed for Account record pages. It displays only verified observations and current verified medications, with the latest ten of each. Users need `PS_Zco_ClinicalData_Read`, record-level access, and read access to the queried clinical fields. The component does not interpret values as clinical advice.

@@ -24,5 +24,25 @@ private class ZcoPreConsultSummaryControllerTest {
         System.assertEquals('Summary Patient', summary.patientName);
         System.assertEquals('Care plan active', summary.carePlanStatus);
         System.assert(summary.verifiedMedicationNames.contains('Metformin'));
+
+        Patient_Intake__c intake = new Patient_Intake__c(
+            Patient__c = patient.Id,
+            Status__c = 'Draft'
+        );
+        insert intake;
+        ZcoPreConsultSummaryController.SummaryData intakeSummary =
+            ZcoPreConsultSummaryController.getSummary(intake.Id);
+        System.assertEquals(patient.Id, intakeSummary.patientId);
+        System.assertEquals('Summary Patient', intakeSummary.patientName);
+
+        Appointment__c appointment = new Appointment__c(
+            Patient__c = patient.Id,
+            Status__c = 'Scheduled'
+        );
+        insert appointment;
+        ZcoPreConsultSummaryController.SummaryData appointmentSummary =
+            ZcoPreConsultSummaryController.getSummary(appointment.Id);
+        System.assertEquals(patient.Id, appointmentSummary.patientId);
+        System.assertEquals('Summary Patient', appointmentSummary.patientName);
     }
 }

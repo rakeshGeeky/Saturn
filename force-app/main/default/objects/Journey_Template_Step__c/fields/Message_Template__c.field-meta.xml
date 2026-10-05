@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Message_Template__c</fullName>
+    <label>Message Template</label>
+    <referenceTo>Message_Template__c</referenceTo>
+    <relationshipLabel>Message Template Records</relationshipLabel>
+    <relationshipName>Message_Template</relationshipName>
+    <type>Lookup</type>
+</CustomField>

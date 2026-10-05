@@ -11,9 +11,6 @@
         <name>OriginBuilderType</name>
         <value><stringValue>LightningFlowBuilder</stringValue></value>
     </processMetadataValues>
-    <recordCreates/>
-    <recordLookups/>
-    <recordUpdates/>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sendable__c</fullName>
+    <label>Sendable</label>
+    <formula>Active__c &amp;&amp; Medical_Approved__c &amp;&amp; Legal_Approved__c &amp;&amp; NOT(ISBLANK(Provider_Template_Id__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <type>Checkbox</type>
+    <required>false</required>
+</CustomField>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Years_Band__c</fullName>
+    <label>Years Since Diagnosis</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>&lt;1</fullName>
+                <default>false</default>
+                <label>&lt;1</label>
+            </value>
+            <value>
+                <fullName>1-5</fullName>
+                <default>false</default>
+                <label>1-5</label>
+            </value>
+            <value>
+                <fullName>5-10</fullName>
+                <default>false</default>
+                <label>5-10</label>
+            </value>
+            <value>
+                <fullName>10+</fullName>
+                <default>false</default>
+                <label>10+</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

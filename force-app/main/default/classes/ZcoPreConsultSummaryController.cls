@@ -10,7 +10,41 @@ public with sharing class ZcoPreConsultSummaryController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static SummaryData getSummary(Id patientId) {
+    public static SummaryData getSummary(Id recordId) {
+        if (recordId == null) {
+            return null;
+        }
+
+        Id patientId;
+        if (recordId.getSObjectType() == Account.SObjectType) {
+            patientId = recordId;
+        } else if (recordId.getSObjectType() == Patient_Intake__c.SObjectType) {
+            List<Patient_Intake__c> intakes = [
+                SELECT Patient__c
+                FROM Patient_Intake__c
+                WHERE Id = :recordId
+                WITH USER_MODE
+                LIMIT 1
+            ];
+            if (intakes.isEmpty()) {
+                return null;
+            }
+            patientId = intakes[0].Patient__c;
+        } else if (recordId.getSObjectType() == Appointment__c.SObjectType) {
+            List<Appointment__c> appointments = [
+                SELECT Patient__c
+                FROM Appointment__c
+                WHERE Id = :recordId
+                WITH USER_MODE
+                LIMIT 1
+            ];
+            if (appointments.isEmpty()) {
+                return null;
+            }
+            patientId = appointments[0].Patient__c;
+        } else {
+            return null;
+        }
         if (patientId == null) {
             return null;
         }
@@ -31,6 +65,7 @@ public with sharing class ZcoPreConsultSummaryController {
             SELECT Id, Status__c, Next_Due_Date__c
             FROM Care_Journey__c
             WHERE Patient__c = :patientId
+            WITH USER_MODE
             ORDER BY Last_Consult_Date__c DESC NULLS LAST, LastModifiedDate DESC
             LIMIT 1
         ];
@@ -44,6 +79,7 @@ public with sharing class ZcoPreConsultSummaryController {
             SELECT Id, Drug_Name__c
             FROM Medication_Statement__c
             WHERE Patient__c = :patientId AND Verified__c = true AND Status__c = 'Current'
+            WITH USER_MODE
             ORDER BY LastModifiedDate DESC
             LIMIT 5
         ];
@@ -56,6 +92,7 @@ public with sharing class ZcoPreConsultSummaryController {
             SELECT Id, Type__c, Value__c, Unit__c, Recorded_Date__c
             FROM Clinical_Observation__c
             WHERE Patient__c = :patientId AND Verified__c = true
+            WITH USER_MODE
             ORDER BY Recorded_Date__c DESC
             LIMIT 5
         ];

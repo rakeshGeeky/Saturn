@@ -8,7 +8,7 @@ public with sharing class ZcoFeatureFlags {
         if (flag == null) {
             return defaultValue;
         }
-        return flag.Is_Enabled__c;
+        return flag.Feature__c == featureKey.trim() ? flag.Enabled__c : flag.Is_Enabled__c;
     }
 
     public static String getValue(String featureKey) {
@@ -30,9 +30,9 @@ public with sharing class ZcoFeatureFlags {
 
         String normalizedKey = featureKey.trim();
         for (Zco_Feature_Flag__mdt flag : [
-            SELECT Id, DeveloperName, Key__c, Is_Enabled__c, Value__c
+            SELECT Id, DeveloperName, Feature__c, Enabled__c, Key__c, Is_Enabled__c, Value__c
             FROM Zco_Feature_Flag__mdt
-            WHERE Key__c = :normalizedKey
+            WHERE Feature__c = :normalizedKey OR Key__c = :normalizedKey
             LIMIT 1
         ]) {
             return flag;

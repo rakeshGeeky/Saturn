@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validated_By__c</fullName>
+    <label>Validation &amp; sharing</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Validation &amp; sharing Records</relationshipLabel>
+    <relationshipName>Validated_By</relationshipName>
+    <type>Lookup</type>
+</CustomField>

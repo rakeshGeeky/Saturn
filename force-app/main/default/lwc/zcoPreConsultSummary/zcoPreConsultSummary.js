@@ -6,7 +6,7 @@ export default class ZcoPreConsultSummary extends LightningElement {
     summary;
     error;
 
-    @wire(getSummary, { patientId: '$recordId' })
+    @wire(getSummary, { recordId: '$recordId' })
     wiredSummary({ data, error }) {
         if (data) {
             this.summary = data;
@@ -14,6 +14,9 @@ export default class ZcoPreConsultSummary extends LightningElement {
         } else if (error) {
             this.summary = undefined;
             this.error = error;
+        } else {
+            this.summary = undefined;
+            this.error = undefined;
         }
     }
 

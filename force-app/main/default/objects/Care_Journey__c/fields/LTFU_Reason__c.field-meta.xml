@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LTFU_Reason__c</fullName>
+    <label>Lost-to-follow-up Reason</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Moved</fullName>
+                <default>false</default>
+                <label>Moved</label>
+            </value>
+            <value>
+                <fullName>Cost</fullName>
+                <default>false</default>
+                <label>Cost</label>
+            </value>
+            <value>
+                <fullName>Feels fine</fullName>
+                <default>false</default>
+                <label>Feels fine</label>
+            </value>
+            <value>
+                <fullName>Seeing another doctor</fullName>
+                <default>false</default>
+                <label>Seeing another doctor</label>
+            </value>
+            <value>
+                <fullName>Unreachable</fullName>
+                <default>false</default>
+                <label>Unreachable</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

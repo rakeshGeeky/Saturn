@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Device_Type__c</fullName>
+    <label>Device Type</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>CGM sensor</fullName>
+                <default>false</default>
+                <label>CGM sensor</label>
+            </value>
+            <value>
+                <fullName>CGM reader</fullName>
+                <default>false</default>
+                <label>CGM reader</label>
+            </value>
+            <value>
+                <fullName>Glucometer</fullName>
+                <default>false</default>
+                <label>Glucometer</label>
+            </value>
+            <value>
+                <fullName>Smart scale</fullName>
+                <default>false</default>
+                <label>Smart scale</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

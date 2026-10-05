@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purpose__c</fullName>
+    <label>Purpose</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Program</fullName>
+                <default>false</default>
+                <label>Program</label>
+            </value>
+            <value>
+                <fullName>CGM kit</fullName>
+                <default>false</default>
+                <label>CGM kit</label>
+            </value>
+            <value>
+                <fullName>Sensor refill</fullName>
+                <default>false</default>
+                <label>Sensor refill</label>
+            </value>
+            <value>
+                <fullName>Lab panel</fullName>
+                <default>false</default>
+                <label>Lab panel</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+    <required>true</required>
+</CustomField>

@@ -6,7 +6,7 @@ export default class ZcoCareJourneyPath extends LightningElement {
     journeyCard;
     error;
 
-    @wire(getCareJourneyCard, { journeyId: '$recordId' })
+    @wire(getCareJourneyCard, { recordId: '$recordId' })
     wiredJourneyCard({ data, error }) {
         if (data) {
             this.journeyCard = data;
@@ -14,6 +14,9 @@ export default class ZcoCareJourneyPath extends LightningElement {
         } else if (error) {
             this.journeyCard = undefined;
             this.error = error;
+        } else {
+            this.journeyCard = undefined;
+            this.error = undefined;
         }
     }
 

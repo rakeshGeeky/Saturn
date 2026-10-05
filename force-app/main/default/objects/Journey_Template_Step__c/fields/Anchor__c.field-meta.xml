@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Anchor__c</fullName>
+    <label>Anchor</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Consult date</fullName>
+                <default>false</default>
+                <label>Consult date</label>
+            </value>
+            <value>
+                <fullName>Journey start</fullName>
+                <default>false</default>
+                <label>Journey start</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+    <required>true</required>
+</CustomField>

@@ -13,7 +13,7 @@ public with sharing class ZcoWebhookSecurity {
             Crypto.generateMac('HMACSHA256', Blob.valueOf(rawBody), Blob.valueOf(sharedSecret))
         );
 
-        return String.equalsIgnoreCase(signature, expectedSignature);
+        return signature.equalsIgnoreCase(expectedSignature);
     }
 
     public static Boolean verify(Map<String, String> headers, String rawBody, String sharedSecret, Integer maxAgeMinutes) {

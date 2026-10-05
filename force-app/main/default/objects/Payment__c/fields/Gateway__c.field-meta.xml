@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gateway__c</fullName>
+    <label>Gateway</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Razorpay</fullName>
+                <default>false</default>
+                <label>Razorpay</label>
+            </value>
+            <value>
+                <fullName>Cashfree</fullName>
+                <default>false</default>
+                <label>Cashfree</label>
+            </value>
+            <value>
+                <fullName>PayU</fullName>
+                <default>false</default>
+                <label>PayU</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

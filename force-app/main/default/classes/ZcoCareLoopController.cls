@@ -55,27 +55,52 @@ public with sharing class ZcoCareLoopController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static PatientCard getCareJourneyCard(Id journeyId) {
-        if (journeyId == null) {
+    public static PatientCard getCareJourneyCard(Id recordId) {
+        if (recordId == null) {
             return null;
         }
 
-        Care_Journey__c journey = [
-            SELECT Id, Status__c, Next_Due_Date__c, Last_Consult_Date__c, Patient__c
-            FROM Care_Journey__c
-            WHERE Id = :journeyId
-            WITH USER_MODE
-            LIMIT 1
-        ];
+        Care_Journey__c journey;
+        Id patientId;
+        if (recordId.getSObjectType() == Care_Journey__c.SObjectType) {
+            List<Care_Journey__c> journeys = [
+                SELECT Id, Status__c, Next_Due_Date__c, Last_Consult_Date__c, Patient__c
+                FROM Care_Journey__c
+                WHERE Id = :recordId
+                WITH USER_MODE
+                LIMIT 1
+            ];
+            if (journeys.isEmpty()) {
+                return null;
+            }
+            journey = journeys[0];
+            patientId = journey.Patient__c;
+        } else if (recordId.getSObjectType() == Account.SObjectType) {
+            patientId = recordId;
+            List<Care_Journey__c> journeys = [
+                SELECT Id, Status__c, Next_Due_Date__c, Last_Consult_Date__c, Patient__c
+                FROM Care_Journey__c
+                WHERE Patient__c = :patientId
+                WITH USER_MODE
+                ORDER BY Last_Consult_Date__c DESC NULLS LAST, LastModifiedDate DESC
+                LIMIT 1
+            ];
+            if (journeys.isEmpty()) {
+                return null;
+            }
+            journey = journeys[0];
+        } else {
+            return null;
+        }
 
-        if (journey == null) {
+        if (patientId == null) {
             return null;
         }
 
         Account patient = [
             SELECT Id, Name, HIS_MRN__c
             FROM Account
-            WHERE Id = :journey.Patient__c
+            WHERE Id = :patientId
             WITH USER_MODE
             LIMIT 1
         ];

@@ -8,6 +8,11 @@
                 <p>Open safety cases: <strong>{journeyCard.openSafetyCases}</strong></p>
             </div>
         </template>
+        <template lwc:elseif={error}>
+            <div class="slds-p-around_medium slds-text-color_error" role="alert">
+                Unable to load care journey details.
+            </div>
+        </template>
         <template lwc:else>
             <div class="slds-p-around_medium slds-text-color_weak">No journey data is available.</div>
         </template>

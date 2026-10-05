@@ -12,6 +12,7 @@
             <objects>
                 <object>Account</object>
                 <object>Patient_Intake__c</object>
+                <object>Appointment__c</object>
             </objects>
         </targetConfig>
     </targetConfigs>

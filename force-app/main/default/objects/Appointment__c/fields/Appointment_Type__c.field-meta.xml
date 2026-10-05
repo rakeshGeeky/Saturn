@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appointment_Type__c</fullName>
+    <label>Appointment Type</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>New consult</fullName>
+                <default>false</default>
+                <label>New consult</label>
+            </value>
+            <value>
+                <fullName>Diabetes follow-up</fullName>
+                <default>false</default>
+                <label>Diabetes follow-up</label>
+            </value>
+            <value>
+                <fullName>Discovery consult</fullName>
+                <default>false</default>
+                <label>Discovery consult</label>
+            </value>
+            <value>
+                <fullName>CGM review</fullName>
+                <default>false</default>
+                <label>CGM review</label>
+            </value>
+            <value>
+                <fullName>90-day review</fullName>
+                <default>false</default>
+                <label>90-day review</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Kind__c</fullName>
+    <label>Product Kind</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Program</fullName>
+                <default>false</default>
+                <label>Program</label>
+            </value>
+            <value>
+                <fullName>Device kit</fullName>
+                <default>false</default>
+                <label>Device kit</label>
+            </value>
+            <value>
+                <fullName>Refill pack</fullName>
+                <default>false</default>
+                <label>Refill pack</label>
+            </value>
+            <value>
+                <fullName>Lab panel</fullName>
+                <default>false</default>
+                <label>Lab panel</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+    <required>true</required>
+</CustomField>

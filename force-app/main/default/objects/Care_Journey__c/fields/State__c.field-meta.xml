@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>State__c</fullName>
+    <label>State</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Care plan active</fullName>
+                <default>true</default>
+                <label>Care plan active</label>
+            </value>
+            <value>
+                <fullName>Due</fullName>
+                <default>false</default>
+                <label>Due</label>
+            </value>
+            <value>
+                <fullName>Outreach sent</fullName>
+                <default>false</default>
+                <label>Outreach sent</label>
+            </value>
+            <value>
+                <fullName>Snoozed</fullName>
+                <default>false</default>
+                <label>Snoozed</label>
+            </value>
+            <value>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+                <label>Scheduled</label>
+            </value>
+            <value>
+                <fullName>Check-in done</fullName>
+                <default>false</default>
+                <label>Check-in done</label>
+            </value>
+            <value>
+                <fullName>Pre-consult ready</fullName>
+                <default>false</default>
+                <label>Pre-consult ready</label>
+            </value>
+            <value>
+                <fullName>Consulted</fullName>
+                <default>false</default>
+                <label>Consulted</label>
+            </value>
+            <value>
+                <fullName>Lost to follow-up</fullName>
+                <default>false</default>
+                <label>Lost to follow-up</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+    <required>true</required>
+</CustomField>

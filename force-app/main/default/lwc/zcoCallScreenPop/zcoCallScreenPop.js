@@ -14,6 +14,9 @@ export default class ZcoCallScreenPop extends LightningElement {
         } else if (error) {
             this.patientCard = undefined;
             this.error = error;
+        } else {
+            this.patientCard = undefined;
+            this.error = undefined;
         }
     }
 

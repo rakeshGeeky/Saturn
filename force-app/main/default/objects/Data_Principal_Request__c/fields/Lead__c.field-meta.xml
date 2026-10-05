@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead__c</fullName>
+    <label>DPR fields</label>
+    <referenceTo>Lead</referenceTo>
+    <relationshipLabel>DPR fields Records</relationshipLabel>
+    <relationshipName>DataPrincipalRequestLead</relationshipName>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Checkin_Template__c</fullName>
+    <label>Check-in Template</label>
+    <referenceTo>Message_Template__c</referenceTo>
+    <relationshipLabel>Check-in Template Records</relationshipLabel>
+    <relationshipName>Checkin_Template</relationshipName>
+    <type>Lookup</type>
+</CustomField>

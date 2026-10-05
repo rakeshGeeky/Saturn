@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OUT_Validate_Before_Share</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(Card_Sent_At__c)) &amp;&amp; (NOT(Doctor_Validated__c) || NOT(Share_Consent__c))</errorConditionFormula>
+    <errorMessage>Outcome cards need doctor validation and patient consent.</errorMessage>
+</ValidationRule>

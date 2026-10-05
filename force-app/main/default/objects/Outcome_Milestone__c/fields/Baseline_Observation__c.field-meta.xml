@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Baseline_Observation__c</fullName>
+    <label>Baseline Observation</label>
+    <referenceTo>Clinical_Observation__c</referenceTo>
+    <relationshipLabel>Baseline Outcome Milestones</relationshipLabel>
+    <relationshipName>Baseline_Observation</relationshipName>
+    <type>Lookup</type>
+</CustomField>

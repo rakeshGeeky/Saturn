@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Mode__c</fullName>
+    <label>Payment Mode</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Full</fullName>
+                <default>false</default>
+                <label>Full</label>
+            </value>
+            <value>
+                <fullName>EMI (card)</fullName>
+                <default>false</default>
+                <label>EMI (card)</label>
+            </value>
+            <value>
+                <fullName>No-cost EMI</fullName>
+                <default>false</default>
+                <label>No-cost EMI</label>
+            </value>
+            <value>
+                <fullName>Part payment</fullName>
+                <default>false</default>
+                <label>Part payment</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

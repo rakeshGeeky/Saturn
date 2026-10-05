@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disposition__c</fullName>
+    <label>Disposition</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Interested</fullName>
+                <default>false</default>
+                <label>Interested</label>
+            </value>
+            <value>
+                <fullName>Family call needed</fullName>
+                <default>false</default>
+                <label>Family call needed</label>
+            </value>
+            <value>
+                <fullName>Callback</fullName>
+                <default>false</default>
+                <label>Callback</label>
+            </value>
+            <value>
+                <fullName>Nurture</fullName>
+                <default>false</default>
+                <label>Nurture</label>
+            </value>
+            <value>
+                <fullName>Not a fit</fullName>
+                <default>false</default>
+                <label>Not a fit</label>
+            </value>
+            <value>
+                <fullName>Price objection</fullName>
+                <default>false</default>
+                <label>Price objection</label>
+            </value>
+            <value>
+                <fullName>Doctor review</fullName>
+                <default>false</default>
+                <label>Doctor review</label>
+            </value>
+            <value>
+                <fullName>DND</fullName>
+                <default>false</default>
+                <label>DND</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

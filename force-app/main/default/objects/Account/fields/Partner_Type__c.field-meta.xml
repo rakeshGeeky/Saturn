@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner_Type__c</fullName>
+    <label>Partner Type</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Diabetologist clinic</fullName>
+                <default>false</default>
+                <label>Diabetologist clinic</label>
+            </value>
+            <value>
+                <fullName>Endocrinology practice</fullName>
+                <default>false</default>
+                <label>Endocrinology practice</label>
+            </value>
+            <value>
+                <fullName>Partner lab</fullName>
+                <default>false</default>
+                <label>Partner lab</label>
+            </value>
+            <value>
+                <fullName>Pharmacy</fullName>
+                <default>false</default>
+                <label>Pharmacy</label>
+            </value>
+            <value>
+                <fullName>Corporate</fullName>
+                <default>false</default>
+                <label>Corporate</label>
+            </value>
+            <value>
+                <fullName>Insurer</fullName>
+                <default>false</default>
+                <label>Insurer</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

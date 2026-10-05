@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>DPR fields</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Access</fullName>
+                <default>false</default>
+                <label>Access</label>
+            </value>
+            <value>
+                <fullName>Correction</fullName>
+                <default>false</default>
+                <label>Correction</label>
+            </value>
+            <value>
+                <fullName>Erasure</fullName>
+                <default>false</default>
+                <label>Erasure</label>
+            </value>
+            <value>
+                <fullName>Grievance</fullName>
+                <default>false</default>
+                <label>Grievance</label>
+            </value>
+            <value>
+                <fullName>Nomination</fullName>
+                <default>false</default>
+                <label>Nomination</label>
+            </value>
+            <value>
+                <fullName>Consent withdrawal</fullName>
+                <default>false</default>
+                <label>Consent withdrawal</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

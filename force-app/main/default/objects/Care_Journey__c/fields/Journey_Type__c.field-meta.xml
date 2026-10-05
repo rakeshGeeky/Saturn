@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Journey_Type__c</fullName>
+    <label>Journey Type</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Diabetes follow-up loop</fullName>
+                <default>false</default>
+                <label>Diabetes follow-up loop</label>
+            </value>
+            <value>
+                <fullName>Diabetes program</fullName>
+                <default>false</default>
+                <label>Diabetes program</label>
+            </value>
+            <value>
+                <fullName>Specialty consult</fullName>
+                <default>false</default>
+                <label>Specialty consult</label>
+            </value>
+            <value>
+                <fullName>Hypertension</fullName>
+                <default>false</default>
+                <label>Hypertension</label>
+            </value>
+            <value>
+                <fullName>Prediabetes</fullName>
+                <default>false</default>
+                <label>Prediabetes</label>
+            </value>
+            <value>
+                <fullName>Post-discharge</fullName>
+                <default>false</default>
+                <label>Post-discharge</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+    <required>true</required>
+</CustomField>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safety_Trigger__c</fullName>
+    <label>Safety Trigger</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Check-in low sugar</fullName>
+                <default>false</default>
+                <label>Check-in low sugar</label>
+            </value>
+            <value>
+                <fullName>Reading outside threshold</fullName>
+                <default>false</default>
+                <label>Reading outside threshold</label>
+            </value>
+            <value>
+                <fullName>Message keyword</fullName>
+                <default>false</default>
+                <label>Message keyword</label>
+            </value>
+            <value>
+                <fullName>App low-glucose alert</fullName>
+                <default>false</default>
+                <label>App low-glucose alert</label>
+            </value>
+            <value>
+                <fullName>Counsellor raised</fullName>
+                <default>false</default>
+                <label>Counsellor raised</label>
+            </value>
+            <value>
+                <fullName>Caregiver raised</fullName>
+                <default>false</default>
+                <label>Caregiver raised</label>
+            </value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

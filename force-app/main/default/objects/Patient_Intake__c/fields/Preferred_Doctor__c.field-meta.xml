@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preferred_Doctor__c</fullName>
+    <label>Preferred Doctor</label>
+    <referenceTo>Provider__c</referenceTo>
+    <relationshipLabel>Preferred Doctor Records</relationshipLabel>
+    <relationshipName>Preferred_Doctor</relationshipName>
+    <type>Lookup</type>
+</CustomField>

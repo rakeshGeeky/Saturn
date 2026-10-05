@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enrollment__c</fullName>
+    <label>Shipment fields</label>
+    <referenceTo>Enrollment__c</referenceTo>
+    <relationshipLabel>Shipment fields Records</relationshipLabel>
+    <relationshipName>DeviceShipmentEnrollment</relationshipName>
+    <type>Lookup</type>
+</CustomField>

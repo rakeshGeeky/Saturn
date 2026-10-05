@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disposition__c</fullName>
+    <label>Disposition</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <value><fullName>Answered</fullName><default>false</default><label>Answered</label></value>
+            <value><fullName>No answer</fullName><default>false</default><label>No answer</label></value>
+            <value><fullName>Voicemail</fullName><default>false</default><label>Voicemail</label></value>
+            <value><fullName>Busy</fullName><default>false</default><label>Busy</label></value>
+            <value><fullName>Wrong number</fullName><default>false</default><label>Wrong number</label></value>
+            <value><fullName>Callback requested</fullName><default>false</default><label>Callback requested</label></value>
+            <value><fullName>Follow-up booked</fullName><default>false</default><label>Follow-up booked</label></value>
+            <sorted>false</sorted>
+        </valueSetDefinition>
+        <restricted>true</restricted>
+    </valueSet>
+</CustomField>

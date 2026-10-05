@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Day90_Observation__c</fullName>
+    <label>Day 90 Observation</label>
+    <referenceTo>Clinical_Observation__c</referenceTo>
+    <relationshipLabel>Day 90 Outcome Milestones</relationshipLabel>
+    <relationshipName>Day90_Observation</relationshipName>
+    <type>Lookup</type>
+</CustomField>
