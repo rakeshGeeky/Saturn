@@ -44,6 +44,7 @@
         <members>Zco_Payment_Event__e</members>
         <members>Zco_Courier_Event__e</members>
         <members>Zco_Lab_Event__e</members>
+        <members>Health_Assessment__c</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -107,7 +108,23 @@
         <members>Clinical_Observation__c.Outside_Threshold__c</members>
         <members>Clinical_Observation__c.Threshold_Rule__c</members>
         <members>Clinical_Observation__c.Action_Required__c</members>
+        <members>Health_Assessment__c.*</members>
         <name>CustomField</name>
+    </types>
+    <types>
+        <members>Appointment__c</members>
+        <members>Care_Journey__c</members>
+        <members>Clinical_Observation__c</members>
+        <members>Health_Assessment__c</members>
+        <members>Medication_Statement__c</members>
+        <members>Patient_Intake__c</members>
+        <members>WhatsApp_Message__c</members>
+        <members>Zco_Care_Workbench</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <name>Profile</name>
     </types>
     <types>
         <members>Zco_Banned_Phrase__mdt.Cure_Diabetes</members>
