@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>Match_Result__c</fullName>
-<label>Match Result</label>
-<type>Picklist</type>
-<required>false</required>
-<valueSet>
-<valueSetDefinition>
-<value>
-<fullName>Existing</fullName>
-<default>false</default>
-<label>Existing</label>
-</value>
-<value>
-<fullName>New</fullName>
-<default>false</default>
-<label>New</label>
-</value>
-<value>
-<fullName>Multiple</fullName>
-<default>false</default>
-<label>Multiple</label>
-</value>
-<value>
-<fullName>Unknown</fullName>
-<default>true</default>
-<label>Unknown</label>
-</value>
-</valueSetDefinition>
-</valueSet>
+    <fullName>Match_Result__c</fullName>
+    <label>Match Result</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Existing</fullName>
+                <default>false</default>
+                <label>Existing</label>
+            </value>
+            <value>
+                <fullName>New</fullName>
+                <default>false</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Multiple</fullName>
+                <default>false</default>
+                <label>Multiple</label>
+            </value>
+            <value>
+                <fullName>Unknown</fullName>
+                <default>true</default>
+                <label>Unknown</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
 </CustomField>

@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>Match inbound call events to a patient or lead and publish the screen-pop action for the answering agent.</description>
     <label>Zco_PE_CallEvent</label>
     <processMetadataValues>
         <name>CanvasMode</name>
-        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
     </processMetadataValues>
     <processMetadataValues>
         <name>OriginBuilderType</name>
-        <value><stringValue>LightningFlowBuilder</stringValue></value>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
     </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <flowRunAsUser>TriggeringUser</flowRunAsUser>
         <object>Zco_Call_Event__e</object>
         <triggerType>PlatformEvent</triggerType>
     </start>
-    <status>Draft</status>
+    <status>InvalidDraft</status>
 </Flow>

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TeleCMI_Call_Id__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <externalId>true</externalId>
     <label>TeleCMI Call ID</label>
     <length>64</length>
-    <type>Text</type>
-    <externalId>true</externalId>
-    <unique>true</unique>
-     <caseSensitive>false</caseSensitive>
     <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
 </CustomField>

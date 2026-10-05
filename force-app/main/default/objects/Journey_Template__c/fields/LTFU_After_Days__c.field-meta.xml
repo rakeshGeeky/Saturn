@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>LTFU_After_Days__c</fullName>
-<label>LTFU After Days</label>
-<type>Number</type>
-<required>false</required>
-<precision>18</precision>
-<scale>0</scale>
-<defaultValue>0</defaultValue>
+    <fullName>LTFU_After_Days__c</fullName>
+    <defaultValue>0</defaultValue>
+    <externalId>false</externalId>
+    <label>LTFU After Days</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
 </CustomField>

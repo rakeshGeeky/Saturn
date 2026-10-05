@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Enrollment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
     <label>Refund fields</label>
     <referenceTo>Enrollment__c</referenceTo>
     <relationshipLabel>Refund fields Records</relationshipLabel>
     <relationshipName>RefundRequestEnrollment</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

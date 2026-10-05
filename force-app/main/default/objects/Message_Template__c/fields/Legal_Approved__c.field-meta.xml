@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>Legal_Approved__c</fullName>
-<label>Legal Approved</label>
-<type>Checkbox</type>
-<required>false</required>
-<defaultValue>false</defaultValue>
+    <fullName>Legal_Approved__c</fullName>
+    <defaultValue>false</defaultValue>
+    <label>Legal Approved</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
 </CustomField>

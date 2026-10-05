@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-<apiVersion>67.0</apiVersion>
-<description>Normalize mobile numbers before saving Patient or Caregiver Account records.</description>
-<label>Zco_Account_BeforeSave_Normalize</label>
-<processMetadataValues>
-    <name>CanvasMode</name>
-    <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
-</processMetadataValues>
-<processMetadataValues>
-    <name>OriginBuilderType</name>
-    <value><stringValue>LightningFlowBuilder</stringValue></value>
-</processMetadataValues>
-<assignments>
-    <assignmentItems>
-        <assignToReference>$Record.Normalized_Mobile__c</assignToReference>
-        <operator>Assign</operator>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_Normalized_Mobile</name>
+        <label>Set normalized mobile</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Normalized_Mobile__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NormalizedPhone</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Normalize mobile numbers before saving Patient or Caregiver Account records.</description>
+    <formulas>
+        <name>CleanPhone</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TRIM({!$Record.Phone}), &quot; &quot;, &quot;&quot;), &quot;-&quot;, &quot;&quot;), &quot;(&quot;, &quot;&quot;), &quot;)&quot;, &quot;&quot;), &quot;.&quot;, &quot;&quot;), &quot;/&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>NormalizedPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!CleanPhone}), &quot;&quot;, IF(LEFT({!CleanPhone}, 1) = &quot;+&quot;, &quot;+&quot; &amp; SUBSTITUTE({!CleanPhone}, &quot;+&quot;, &quot;&quot;), IF(AND(LEN({!CleanPhone}) = 12, LEFT({!CleanPhone}, 2) = &quot;91&quot;), &quot;+&quot; &amp; {!CleanPhone}, IF(LEN({!CleanPhone}) = 10, &quot;+91&quot; &amp; {!CleanPhone}, IF(AND(LEN({!CleanPhone}) = 11, LEFT({!CleanPhone}, 1) = &quot;0&quot;), &quot;+91&quot; &amp; RIGHT({!CleanPhone}, 10), IF(AND(LEN({!CleanPhone}) = 12, LEFT({!CleanPhone}, 1) = &quot;0&quot;), &quot;+&quot; &amp; RIGHT({!CleanPhone}, 11), &quot;+&quot; &amp; {!CleanPhone}))))))</expression>
+    </formulas>
+    <label>Zco_Account_BeforeSave_Normalize</label>
+    <processMetadataValues>
+        <name>CanvasMode</name>
         <value>
-            <elementReference>NormalizedPhone</elementReference>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
-    </assignmentItems>
-    <label>Set normalized mobile</label>
-    <locationX>176</locationX>
-    <locationY>158</locationY>
-    <name>Set_Normalized_Mobile</name>
-</assignments>
-<formulas>
-    <dataType>String</dataType>
-    <expression>IF(ISBLANK({!CleanPhone}), &quot;&quot;, IF(LEFT({!CleanPhone}, 1) = &quot;+&quot;, &quot;+&quot; &amp; SUBSTITUTE({!CleanPhone}, &quot;+&quot;, &quot;&quot;), IF(AND(LEN({!CleanPhone}) = 12, LEFT({!CleanPhone}, 2) = &quot;91&quot;), &quot;+&quot; &amp; {!CleanPhone}, IF(LEN({!CleanPhone}) = 10, &quot;+91&quot; &amp; {!CleanPhone}, IF(AND(LEN({!CleanPhone}) = 11, LEFT({!CleanPhone}, 1) = &quot;0&quot;), &quot;+91&quot; &amp; RIGHT({!CleanPhone}, 10), IF(AND(LEN({!CleanPhone}) = 12, LEFT({!CleanPhone}, 1) = &quot;0&quot;), &quot;+&quot; &amp; RIGHT({!CleanPhone}, 11), &quot;+&quot; &amp; {!CleanPhone}))))))</expression>
-    <name>NormalizedPhone</name>
-    <scale>0</scale>
-</formulas>
-<formulas>
-    <dataType>String</dataType>
-    <expression>SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TRIM({!$Record.Phone}), &quot; &quot;, &quot;&quot;), &quot;-&quot;, &quot;&quot;), &quot;(&quot;, &quot;&quot;), &quot;)&quot;, &quot;&quot;), &quot;.&quot;, &quot;&quot;), &quot;/&quot;, &quot;&quot;)</expression>
-    <name>CleanPhone</name>
-    <scale>0</scale>
-</formulas>
-<start>
-    <locationX>0</locationX>
-    <locationY>0</locationY>
-    <object>Account</object>
-    <recordTriggerType>CreateAndUpdate</recordTriggerType>
-    <triggerType>RecordBeforeSave</triggerType>
-    <filterFormula>OR(ISNEW(), ISCHANGED($Record.Phone))</filterFormula>
-    <connector>
-        <targetReference>Set_Normalized_Mobile</targetReference>
-    </connector>
-</start>
-<status>Active</status>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Normalized_Mobile</targetReference>
+        </connector>
+        <filterFormula>OR(ISNEW(), ISCHANGED({!$Record.Phone}))</filterFormula>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
 </Flow>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
-<label>PSG_Zco_Integration</label>
-<description>Integration user group</description>
-<permissionSets>PS_Zco_Integration</permissionSets>
+    <description>Integration user group</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG_Zco_Integration</label>
+    <permissionSets>PS_Zco_Integration</permissionSets>
+    <status>Updated</status>
 </PermissionSetGroup>

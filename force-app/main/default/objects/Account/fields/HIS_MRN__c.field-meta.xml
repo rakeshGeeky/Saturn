@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>HIS_MRN__c</fullName>
-<label>HIS MRN</label>
-<type>Text</type>
-<length>40</length>
-<externalId>true</externalId>
-<unique>true</unique>
+    <fullName>HIS_MRN__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <externalId>true</externalId>
+    <label>HIS MRN</label>
+    <length>40</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>true</unique>
 </CustomField>

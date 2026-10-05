@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>OBS_Unit_Matches_Type</fullName>
-<active>true</active>
-<errorConditionFormula>(ISPICKVAL(Type__c,'HbA1c') &amp;&amp; NOT(ISPICKVAL(Unit__c,'%'))) || (CONTAINS(TEXT(Type__c),'BP') &amp;&amp; NOT(ISPICKVAL(Unit__c,'mmHg')))</errorConditionFormula>
-<errorMessage>Unit does not match observation type.</errorMessage>
+    <fullName>OBS_Unit_Matches_Type</fullName>
+    <active>true</active>
+    <errorConditionFormula>(ISPICKVAL(Type__c,&apos;HbA1c&apos;) &amp;&amp; NOT(ISPICKVAL(Unit__c,&apos;%&apos;))) || (CONTAINS(TEXT(Type__c),&apos;BP&apos;) &amp;&amp; NOT(ISPICKVAL(Unit__c,&apos;mmHg&apos;)))</errorConditionFormula>
+    <errorMessage>Unit does not match observation type.</errorMessage>
 </ValidationRule>

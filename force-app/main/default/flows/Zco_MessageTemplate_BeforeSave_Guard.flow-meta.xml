@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-<apiVersion>67.0</apiVersion>
-<description>Reset approval fields when the template body changes to force re-approval.</description>
-<label>Zco_MessageTemplate_BeforeSave_Guard</label>
-<processMetadataValues>
-    <name>CanvasMode</name>
-    <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
-</processMetadataValues>
-<processMetadataValues>
-    <name>OriginBuilderType</name>
-    <value><stringValue>LightningFlowBuilder</stringValue></value>
-</processMetadataValues>
-<assignments>
-    <assignmentItems>
-        <assignToReference>$Record.Active__c</assignToReference>
-        <operator>Assign</operator>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Reset_Template_Approval</name>
+        <label>Reset template approval</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Active__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Legal_Approved__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Medical_Approved__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Reset approval fields when the template body changes to force re-approval.</description>
+    <label>Zco_MessageTemplate_BeforeSave_Guard</label>
+    <processMetadataValues>
+        <name>CanvasMode</name>
         <value>
-            <booleanValue>false</booleanValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
-    </assignmentItems>
-    <assignmentItems>
-        <assignToReference>$Record.Legal_Approved__c</assignToReference>
-        <operator>Assign</operator>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
         <value>
-            <booleanValue>false</booleanValue>
+            <stringValue>LightningFlowBuilder</stringValue>
         </value>
-    </assignmentItems>
-    <assignmentItems>
-        <assignToReference>$Record.Medical_Approved__c</assignToReference>
-        <operator>Assign</operator>
-        <value>
-            <booleanValue>false</booleanValue>
-        </value>
-    </assignmentItems>
-    <label>Reset template approval</label>
-    <locationX>176</locationX>
-    <locationY>158</locationY>
-    <name>Reset_Template_Approval</name>
-</assignments>
-<start>
-    <locationX>0</locationX>
-    <locationY>0</locationY>
-    <object>Message_Template__c</object>
-    <recordTriggerType>CreateAndUpdate</recordTriggerType>
-    <triggerType>RecordBeforeSave</triggerType>
-    <filterFormula>ISNEW()</filterFormula>
-    <connector>
-        <targetReference>Reset_Template_Approval</targetReference>
-    </connector>
-</start>
-<status>Active</status>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Reset_Template_Approval</targetReference>
+        </connector>
+        <filterFormula>ISNEW()</filterFormula>
+        <object>Message_Template__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
 </Flow>

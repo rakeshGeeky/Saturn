@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
-<label>PSG_Zco_PrivacyOfficer</label>
-<description>Privacy leadership group</description>
-<permissionSets>PS_Zco_Core</permissionSets>
-<permissionSets>PS_Zco_Privacy</permissionSets>
+    <description>Privacy leadership group</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG_Zco_PrivacyOfficer</label>
+    <permissionSets>PS_Zco_Core</permissionSets>
+    <permissionSets>PS_Zco_Privacy</permissionSets>
+    <status>Updated</status>
 </PermissionSetGroup>

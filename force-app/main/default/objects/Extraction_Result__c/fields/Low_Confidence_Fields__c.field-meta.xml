@@ -3,6 +3,8 @@
     <fullName>Low_Confidence_Fields__c</fullName>
     <label>Low-confidence Fields</label>
     <length>1000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>LongTextArea</type>
     <visibleLines>4</visibleLines>
 </CustomField>

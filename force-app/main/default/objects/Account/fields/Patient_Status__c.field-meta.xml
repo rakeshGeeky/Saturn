@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>Patient_Status__c</fullName>
-<label>Patient Status</label>
-<type>Picklist</type>
-<valueSet>
-<valueSetDefinition>
-<value>
-<fullName>Active</fullName>
-<default>true</default>
-<label>Active</label>
-</value>
-<value>
-<fullName>Paused</fullName>
-<default>false</default>
-<label>Paused</label>
-</value>
-<value>
-<fullName>Maintenance</fullName>
-<default>false</default>
-<label>Maintenance</label>
-</value>
-<value>
-<fullName>Completed</fullName>
-<default>false</default>
-<label>Completed</label>
-</value>
-<value>
-<fullName>Churned</fullName>
-<default>false</default>
-<label>Churned</label>
-</value>
-<value>
-<fullName>Refunded</fullName>
-<default>false</default>
-<label>Refunded</label>
-</value>
-<value>
-<fullName>Inactive</fullName>
-<default>false</default>
-<label>Inactive</label>
-</value>
-</valueSetDefinition>
-</valueSet>
+    <fullName>Patient_Status__c</fullName>
+    <label>Patient Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Active</fullName>
+                <default>true</default>
+                <label>Active</label>
+            </value>
+            <value>
+                <fullName>Paused</fullName>
+                <default>false</default>
+                <label>Paused</label>
+            </value>
+            <value>
+                <fullName>Maintenance</fullName>
+                <default>false</default>
+                <label>Maintenance</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+            <value>
+                <fullName>Churned</fullName>
+                <default>false</default>
+                <label>Churned</label>
+            </value>
+            <value>
+                <fullName>Refunded</fullName>
+                <default>false</default>
+                <label>Refunded</label>
+            </value>
+            <value>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+                <label>Inactive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
 </CustomField>

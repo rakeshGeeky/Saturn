@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>Max_Discount_Without_Approval__c</fullName>
-<label>Maximum Discount Without Approval</label>
-<type>Percent</type>
-<precision>5</precision>
-<scale>2</scale>
+    <fullName>Max_Discount_Without_Approval__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Maximum Discount Without Approval</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Percent</type>
 </CustomField>

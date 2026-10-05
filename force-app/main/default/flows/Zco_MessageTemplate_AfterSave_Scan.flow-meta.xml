@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-<apiVersion>67.0</apiVersion>
-<description>Run banned phrase scanning after a message template is created or updated.</description>
-<label>Zco_MessageTemplate_AfterSave_Scan</label>
-<processMetadataValues>
-    <name>CanvasMode</name>
-    <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
-</processMetadataValues>
-<processMetadataValues>
-    <name>OriginBuilderType</name>
-    <value><stringValue>LightningFlowBuilder</stringValue></value>
-</processMetadataValues>
-<start>
-    <locationX>0</locationX>
-    <locationY>0</locationY>
-    <object>Message_Template__c</object>
-    <recordTriggerType>CreateAndUpdate</recordTriggerType>
-    <triggerType>RecordAfterSave</triggerType>
-    <filterLogic>1</filterLogic>
-    <filters>
-        <field>Id</field>
-        <operator>IsNull</operator>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Run banned phrase scanning after a message template is created or updated.</description>
+    <label>Zco_MessageTemplate_AfterSave_Scan</label>
+    <processMetadataValues>
+        <name>CanvasMode</name>
         <value>
-            <booleanValue>false</booleanValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
-    </filters>
-</start>
-<status>Draft</status>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Message_Template__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>InvalidDraft</status>
 </Flow>

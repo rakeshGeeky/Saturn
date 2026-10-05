@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>CGR_No_Self_Link</fullName>
-<active>true</active>
-<errorConditionFormula>Patient__c = Caregiver__c</errorConditionFormula>
-<errorMessage>A patient cannot be their own caregiver.</errorMessage>
+    <fullName>CGR_No_Self_Link</fullName>
+    <active>true</active>
+    <errorConditionFormula>Patient__c = Caregiver__c</errorConditionFormula>
+    <errorMessage>A patient cannot be their own caregiver.</errorMessage>
 </ValidationRule>

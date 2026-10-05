@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>Schedule and monitor open safety cases to ensure they are acknowledged and worked within the SLA window.</description>
     <label>Zco_Case_Scheduled_SafetySLA</label>
     <processMetadataValues>
         <name>CanvasMode</name>
-        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
     </processMetadataValues>
     <processMetadataValues>
         <name>OriginBuilderType</name>
-        <value><stringValue>LightningFlowBuilder</stringValue></value>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
     </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
@@ -18,5 +24,5 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>InvalidDraft</status>
 </Flow>

@@ -56,7 +56,7 @@ private class ZcoCareJourneyTriggerHandlerTest {
         );
         insert journey;
 
-        ZcoCareJourneyService.transition(journey.Id, 'Due', null);
+       ZcoCareJourneyService.transitionToState('Care plan active', 'Due');
         journey = [SELECT State__c, Attempts__c FROM Care_Journey__c WHERE Id = :journey.Id];
         System.assertEquals('Due', journey.State__c);
         System.assertEquals(0, journey.Attempts__c);

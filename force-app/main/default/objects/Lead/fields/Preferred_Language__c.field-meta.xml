@@ -2,9 +2,13 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Preferred_Language__c</fullName>
     <label>Preferred Language</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>
     <valueSet>
+        <restricted>true</restricted>
         <valueSetDefinition>
+            <sorted>false</sorted>
             <value>
                 <fullName>English</fullName>
                 <default>false</default>
@@ -50,8 +54,6 @@
                 <default>false</default>
                 <label>Malayalam (Global Value Set Zco_Language)</label>
             </value>
-            <sorted>false</sorted>
         </valueSetDefinition>
-        <restricted>true</restricted>
     </valueSet>
 </CustomField>

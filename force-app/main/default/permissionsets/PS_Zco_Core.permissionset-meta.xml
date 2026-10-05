@@ -1,78 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-<label>PS_Zco_Core</label>
-<description>Workbook-derived permission set for PS_Zco_Core.</description>
-<hasActivationRequired>false</hasActivationRequired>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Account</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Care_Journey__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Task</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Appointment__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Patient_Intake__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>WhatsApp_Message__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Call_Log__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Message_Template__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
+    <description>Workbook-derived permission set for PS_Zco_Core.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PS_Zco_Core</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Account</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Appointment__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Call_Log__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Care_Journey__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Message_Template__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Patient_Intake__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>WhatsApp_Message__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
 </PermissionSet>

@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>Process inbound WhatsApp events, upsert message records, and route patient replies or media payloads to the next workflow step.</description>
     <label>Zco_PE_WhatsAppInbound</label>
     <processMetadataValues>
         <name>CanvasMode</name>
-        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
     </processMetadataValues>
     <processMetadataValues>
         <name>OriginBuilderType</name>
-        <value><stringValue>LightningFlowBuilder</stringValue></value>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
     </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <flowRunAsUser>TriggeringUser</flowRunAsUser>
         <object>Zco_WhatsApp_Inbound__e</object>
         <triggerType>PlatformEvent</triggerType>
     </start>
-    <status>Draft</status>
+    <status>InvalidDraft</status>
 </Flow>

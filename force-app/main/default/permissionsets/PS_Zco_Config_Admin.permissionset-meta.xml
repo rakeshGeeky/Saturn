@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-<label>PS_Zco_Config_Admin</label>
-<description>Workbook-derived permission set for PS_Zco_Config_Admin.</description>
-<hasActivationRequired>false</hasActivationRequired>
-<customPermissions>
-    <enabled>true</enabled>
-    <name>Zco_Bypass_Journey_Rules</name>
-</customPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Journey_Template__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
-<objectPermissions>
-<allowCreate>true</allowCreate>
-<allowDelete>false</allowDelete>
-<allowEdit>true</allowEdit>
-<allowRead>true</allowRead>
-<modifyAllRecords>false</modifyAllRecords>
-<object>Message_Template__c</object>
-<viewAllRecords>false</viewAllRecords>
-</objectPermissions>
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>Zco_Bypass_Journey_Rules</name>
+    </customPermissions>
+    <description>Workbook-derived permission set for PS_Zco_Config_Admin.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PS_Zco_Config_Admin</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Journey_Template__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Message_Template__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
 </PermissionSet>

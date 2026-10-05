@@ -3,6 +3,8 @@
     <fullName>Extracted_JSON__c</fullName>
     <label>Extracted JSON</label>
     <length>5000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>LongTextArea</type>
     <visibleLines>4</visibleLines>
 </CustomField>

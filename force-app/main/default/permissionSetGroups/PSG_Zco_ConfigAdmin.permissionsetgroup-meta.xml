@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
-<label>PSG_Zco_ConfigAdmin</label>
-<description>Config admin group</description>
-<permissionSets>PS_Zco_Core</permissionSets>
-<permissionSets>PS_Zco_Config_Admin</permissionSets>
+    <description>Config admin group</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>PSG_Zco_ConfigAdmin</label>
+    <permissionSets>PS_Zco_Config_Admin</permissionSets>
+    <permissionSets>PS_Zco_Core</permissionSets>
+    <status>Updated</status>
 </PermissionSetGroup>

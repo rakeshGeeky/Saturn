@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-<fullName>Applies_To_Source__c</fullName>
-<label>Applies To Source</label>
-<type>Picklist</type>
-<required>true</required>
-<valueSet>
-<valueSetDefinition>
-<value>
-<fullName>All</fullName>
-<default>false</default>
-<label>All</label>
-</value>
-<value>
-<fullName>Patient-reported</fullName>
-<default>false</default>
-<label>Patient-reported</label>
-</value>
-<value>
-<fullName>FHIR</fullName>
-<default>false</default>
-<label>FHIR</label>
-</value>
-</valueSetDefinition>
-</valueSet>
+    <fullName>Applies_To_Source__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Applies To Source</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>All</fullName>
+                <default>false</default>
+                <label>All</label>
+            </value>
+            <value>
+                <fullName>Patient-reported</fullName>
+                <default>false</default>
+                <label>Patient-reported</label>
+            </value>
+            <value>
+                <fullName>FHIR</fullName>
+                <default>false</default>
+                <label>FHIR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
 </CustomField>

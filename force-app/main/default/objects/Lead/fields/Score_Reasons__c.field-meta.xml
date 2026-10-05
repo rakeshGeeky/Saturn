@@ -3,6 +3,7 @@
     <fullName>Score_Reasons__c</fullName>
     <label>Score Reasons</label>
     <length>5000</length>
+    <trackFeedHistory>false</trackFeedHistory>
     <type>LongTextArea</type>
     <visibleLines>4</visibleLines>
 </CustomField>
